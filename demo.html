@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Prueba - Organizador de PDFs por Código</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Arial;max-width:900px;margin:24px auto;padding:0 14px}
+    .demo{background:#f8f9fa;border:1px solid #e9ecef;border-radius:8px;padding:16px;margin:16px 0}
+    .examples{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+    .example{background:white;border:1px solid #ddd;border-radius:8px;padding:12px}
+    h1{color:#2563eb}
+    h2{color:#059669}
+    code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace}
+  </style>
+</head>
+<body>
+  <h1>🎉 ¡Aplicación Actualizada!</h1>
+  
+  <div class="demo">
+    <h2>✨ Ahora es Genérica</h2>
+    <p>La aplicación ya no está limitada a códigos MIA. Ahora funciona con <strong>cualquier tipo de código alfanumérico</strong>:</p>
+    
+    <div class="examples">
+      <div class="example">
+        <h3>Códigos MIA</h3>
+        <code>MIA000044043205</code><br>
+        <code>MIA784587451</code><br>
+        <code>MIA-2022-VII</code>
+      </div>
+      
+      <div class="example">
+        <h3>Códigos SAC</h3>
+        <code>SAC-2022-VII</code><br>
+        <code>SAC20221522</code><br>
+        <code>SAC_001_234</code>
+      </div>
+      
+      <div class="example">
+        <h3>Códigos ABC</h3>
+        <code>ABC123456</code><br>
+        <code>ABC-789-012</code><br>
+        <code>ABC_2023_001</code>
+      </div>
+      
+      <div class="example">
+        <h3>Otros Códigos</h3>
+        <code>XYZ789012</code><br>
+        <code>OTRO123456</code><br>
+        <code>PROY2023001</code>
+      </div>
+    </div>
+  </div>
+  
+  <div class="demo">
+    <h2>🔧 Cómo Funciona</h2>
+    <ol>
+      <li><strong>Selecciona el modo:</strong>
+        <ul>
+          <li><strong>Por nombre:</strong> Busca códigos en los nombres de archivo (ej: <code>ABC123_documento.pdf</code>)</li>
+          <li><strong>Por contenido:</strong> Busca códigos dentro del texto del PDF</li>
+          <li><strong>Híbrido:</strong> Combina ambos métodos</li>
+        </ul>
+      </li>
+      <li><strong>Sube tus PDFs:</strong> Múltiples archivos a la vez</li>
+      <li><strong>Lista los códigos:</strong> En el orden que quieres que aparezcan</li>
+      <li><strong>Genera el PDF:</strong> Automáticamente organizado</li>
+    </ol>
+  </div>
+  
+  <div class="demo">
+    <h2>🚀 Acceso a la Aplicación</h2>
+    <p><strong>Página Principal:</strong> <a href="https://api-oculto-9k7s.aaleddy.app/" target="_blank">https://api-oculto-9k7s.aaleddy.app/</a></p>
+    <p><strong>Versión Debug:</strong> <a href="https://api-oculto-9k7s.aaleddy.app/debug" target="_blank">https://api-oculto-9k7s.aaleddy.app/debug</a></p>
+  </div>
+  
+  <div class="demo">
+    <h2>📋 Ejemplo de Uso</h2>
+    <p><strong>Códigos en el textarea:</strong></p>
+    <pre style="background:#f1f5f9;padding:12px;border-radius:6px;">ABC123456
+SAC-2022-VII
+MIA000044043205
+XYZ789012
+OTRO123</pre>
+    
+    <p><strong>La aplicación buscará estos códigos en:</strong></p>
+    <ul>
+      <li>Nombres de archivo: <code>ABC123456_documento.pdf</code>, <code>SAC-2022-VII-final.pdf</code></li>
+      <li>Contenido del PDF: Texto dentro de los documentos</li>
+    </ul>
+  </div>
+  
+  <script>
+    // Redirigir automáticamente después de 10 segundos
+    setTimeout(() => {
+      if (confirm('¿Quieres ir a la aplicación principal?')) {
+        window.location.href = 'https://api-oculto-9k7s.aaleddy.app/';
+      }
+    }, 10000);
+  </script>
+</body>
+</html>
