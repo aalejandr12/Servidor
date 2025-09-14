@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>PurrCrafter - Tu herramienta amigable para manipular PDFs</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <style type="text/tailwindcss">
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #1F2937;
+            --primary-color: #2563EB;
+            --secondary-color: #F9FAFB;
+            --accent-color: #3B82F6;
+            --border-color: #E5E7EB;
+            --text-muted-color: #6B7280;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .purr-card {
+            transition: all 0.3s ease-in-out;
+            background-color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+        }
+        .purr-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border-color: var(--primary-color);
+        }
+        .purr-button {
+            transition: all 0.3s ease-in-out;
+            background-color: var(--primary-color);
+        }
+        .purr-button:hover {
+            transform: scale(1.05);
+            background-color: var(--accent-color);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+        }
+        .filter-button {
+            transition: all 0.3s ease-in-out;
+            color: var(--text-muted-color);
+        }
+        .filter-button.active {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+        .filter-button:hover:not(.active) {
+            background-color: #E5E7EB;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto px-4 min-h-screen flex flex-col items-center pt-10">
+        <header class="text-center w-full max-w-4xl mb-8">
+            <h1 class="text-5xl font-bold text-[var(--text-color)] drop-shadow-sm">PurrCrafter</h1>
+            <p class="text-lg text-[var(--text-muted-color)] mt-2">Tu herramienta amigable para manipular tus archivos</p>
+        </header>
+        
+        <div class="w-full max-w-4xl mb-12 flex justify-center">
+            <div class="bg-[var(--secondary-color)]/80 backdrop-blur-sm p-2 rounded-full shadow-sm border border-[var(--border-color)] flex space-x-2">
+                <button class="filter-button active px-6 py-2 rounded-full text-md">Todos</button>
+                <button class="filter-button px-6 py-2 rounded-full text-md">PDF</button>
+                <button class="filter-button px-6 py-2 rounded-full text-md">Videos</button>
+            </div>
+        </div>
+        
+        <main class="w-full max-w-4xl flex-grow">
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <div class="p-8 rounded-2xl shadow-md flex flex-col items-center justify-center text-center purr-card">
+                    <div class="mb-6">
+                        <svg class="w-20 h-20 text-[var(--primary-color)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-semibold text-[var(--text-color)] mb-3">Unir por Nombre</h2>
+                    <p class="text-[var(--text-muted-color)] mb-8">Organiza y combina tus PDFs según su nombre de archivo.</p>
+                    <button onclick="window.location.href='unir-nombre.html'" class="w-full max-w-xs px-6 py-3 text-lg font-semibold text-white rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-[var(--accent-color)] purr-button">
+                        Seleccionar PDF
+                    </button>
+                </div>
+                
+                <div class="p-8 rounded-2xl shadow-md flex flex-col items-center justify-center text-center purr-card">
+                    <div class="mb-6">
+                        <svg class="w-20 h-20 text-[var(--primary-color)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                            <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-semibold text-[var(--text-color)] mb-3">Unir por Contenido</h2>
+                    <p class="text-[var(--text-muted-color)] mb-8">Fusiona tus PDFs basándose en el contenido de los documentos.</p>
+                    <button onclick="window.location.href='unir-contenido.html'" class="w-full max-w-xs px-6 py-3 text-lg font-semibold text-white rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-[var(--accent-color)] purr-button">
+                        Seleccionar PDF
+                    </button>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="w-full max-w-4xl py-8 mt-12 text-center text-sm text-[var(--text-muted-color)]">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a class="hover:text-[var(--accent-color)] transition-colors" href="terminos.html">Términos y Condiciones</a>
+                <a class="hover:text-[var(--accent-color)] transition-colors" href="privacidad.html">Privacidad</a>
+                <a class="hover:text-[var(--accent-color)] transition-colors" href="mailto:contacto@purrcrafter.com">Contacto</a>
+            </div>
+            <p>© 2024 PurrCrafter. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+</body>
+</html>
