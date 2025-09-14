@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Test - PurrCrafter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-2xl font-bold mb-4">Test de Conexión API</h1>
+        
+        <div id="status" class="mb-4 p-4 rounded-lg bg-gray-50">
+            <p>Estado: <span id="status-text">Probando...</span></p>
+            <p>API: <span id="api-url"></span></p>
+        </div>
+        
+        <button id="test-btn" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+            Probar Conexión
+        </button>
+        
+        <div id="result" class="mt-4 p-4 rounded-lg hidden">
+            <pre id="result-text" class="text-sm"></pre>
+        </div>
+    </div>
+
+    <script>
+        const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+            ? 'http://localhost:3000' 
+            : 'https://aaleddyy.app';
+        
+        document.getElementById('api-url').textContent = API;
+        
+        async function testConnection() {
+            const statusEl = document.getElementById('status');
+            const statusText = document.getElementById('status-text');
+            const resultEl = document.getElementById('result');
+            const resultText = document.getElementById('result-text');
+            
+            statusText.textContent = 'Conectando...';
+            statusEl.className = 'mb-4 p-4 rounded-lg bg-yellow-50 border border-yellow-200';
+            
+            try {
+                console.log('Testing API at:', API);
+                const response = await fetch(`${API}/workspaces`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    statusText.textContent = '✅ Conexión exitosa';
+                    statusEl.className = 'mb-4 p-4 rounded-lg bg-green-50 border border-green-200';
+                    resultText.textContent = JSON.stringify(data, null, 2);
+                    resultEl.className = 'mt-4 p-4 rounded-lg bg-green-50 border border-green-200';
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+            } catch (error) {
+                statusText.textContent = '❌ Error de conexión';
+                statusEl.className = 'mb-4 p-4 rounded-lg bg-red-50 border border-red-200';
+                resultText.textContent = error.message;
+                resultEl.className = 'mt-4 p-4 rounded-lg bg-red-50 border border-red-200';
+            }
+            
+            resultEl.classList.remove('hidden');
+        }
+        
+        document.getElementById('test-btn').addEventListener('click', testConnection);
+        
+        // Probar automáticamente al cargar
+        testConnection();
+    </script>
+</body>
+</html>

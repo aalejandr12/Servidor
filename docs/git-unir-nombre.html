@@ -151,6 +151,31 @@
                     </div>
                     <p class="text-sm text-[var(--text-muted-color)] mt-2 ml-11">Puedes reordenar los códigos para cambiar el orden de unión.</p>
                 </div>
+
+                <!-- Sección de orden manual -->
+                <div class="mt-8 pt-6 border-t border-[var(--border-color)]" id="manual-order-section">
+                    <label class="block text-lg font-medium text-[var(--text-color)] mb-3" for="manual-order-input">
+                        Definición manual del orden de unión
+                    </label>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                        <div class="flex items-start space-x-2">
+                            <span class="material-symbols-outlined text-blue-600 mt-0.5">info</span>
+                            <div class="text-sm text-blue-800">
+                                <strong>Orden manual:</strong> Si conoces el orden específico en que quieres unir los archivos, puedes escribir los números de cada archivo en el orden deseado.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="material-symbols-outlined text-3xl text-[var(--text-muted-color)] mt-3">123</span>
+                        <textarea class="w-full px-4 py-3 border border-[var(--border-color)] rounded-lg focus:ring-2 focus:ring-[var(--accent-color)] focus:border-[var(--accent-color)] transition-shadow min-h-[150px] resize-y" id="manual-order-input" placeholder="Ej:
+3
+1
+2
+
+Introduce el número de cada archivo en una nueva línea para establecer el orden de unión."></textarea>
+                    </div>
+                    <p class="text-sm text-[var(--text-muted-color)] mt-2 ml-11">Introduce el número de cada archivo en una nueva línea para establecer el orden de unión.</p>
+                </div>
                 
                 <div class="mt-8 pt-6 border-t border-[var(--border-color)] text-center">
                     <button class="w-full max-w-md purr-button text-white px-8 py-4 rounded-xl font-semibold text-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-[var(--accent-color)] flex items-center justify-center mx-auto disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none min-h-[64px]" id="main-action-button">
@@ -350,9 +375,17 @@
                 return;
             }
             
-            const codes = orderInput.value.split('\n').map(s => s.trim()).filter(Boolean);
-            if (codes.length === 0) {
-                alert('Debes especificar el orden de los códigos.');
+            // Verificar si hay códigos automáticos o orden manual
+            const automaticCodes = orderInput.value.split('\n').map(s => s.trim()).filter(Boolean);
+            const manualOrder = document.getElementById('manual-order-input').value.split('\n').map(s => s.trim()).filter(Boolean);
+            
+            let finalOrder = [];
+            if (automaticCodes.length > 0) {
+                finalOrder = automaticCodes;
+            } else if (manualOrder.length > 0) {
+                finalOrder = manualOrder;
+            } else {
+                alert('Debes especificar el orden usando códigos automáticos o definición manual.');
                 return;
             }
             
@@ -376,7 +409,7 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        order: codes,
+                        order: finalOrder,
                         output_name: 'resultado.pdf',
                         on_missing: 'skip',
                         source_filter: 'filename',
