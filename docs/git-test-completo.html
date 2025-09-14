@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Test API - PurrCrafter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-3xl font-bold mb-6">🔧 Diagnóstico de API - PurrCrafter</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <!-- API Local -->
+            <div class="border rounded-lg p-4">
+                <h3 class="text-lg font-semibold mb-3 text-blue-800">🏠 API Local</h3>
+                <div class="space-y-2 text-sm">
+                    <p><strong>URL:</strong> http://localhost:3000</p>
+                    <p><strong>Estado:</strong> <span id="local-status" class="px-2 py-1 rounded text-xs">❓ No probado</span></p>
+                    <button id="test-local" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mt-2">
+                        Probar Local
+                    </button>
+                </div>
+            </div>
+            
+            <!-- API Producción -->
+            <div class="border rounded-lg p-4">
+                <h3 class="text-lg font-semibold mb-3 text-green-800">🌐 API Producción</h3>
+                <div class="space-y-2 text-sm">
+                    <p><strong>URL:</strong> https://api-oculto-9k7s.aaleddyy.app</p>
+                    <p><strong>IP:</strong> 190.150.201.118:300</p>
+                    <p><strong>Estado:</strong> <span id="prod-status" class="px-2 py-1 rounded text-xs">❓ No probado</span></p>
+                    <button id="test-prod" class="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 mt-2">
+                        Probar Producción
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Información del Sistema -->
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+            <h3 class="font-semibold text-yellow-800 mb-2">📋 Configuración Detectada:</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div>
+                    <p><strong>Hostname actual:</strong> <span id="current-hostname"></span></p>
+                    <p><strong>Protocolo:</strong> <span id="current-protocol"></span></p>
+                    <p><strong>API seleccionada:</strong> <span id="selected-api"></span></p>
+                </div>
+                <div>
+                    <p><strong>User Agent:</strong> <span id="user-agent"></span></p>
+                    <p><strong>Timestamp:</strong> <span id="timestamp"></span></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resultados de las pruebas -->
+        <div id="test-results" class="space-y-4">
+            <h3 class="text-xl font-semibold mb-4">📊 Resultados de Pruebas:</h3>
+            <!-- Los resultados aparecerán aquí -->
+        </div>
+        
+        <!-- Recomendaciones -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
+            <h3 class="font-semibold text-blue-800 mb-2">💡 Pasos para Solucionar:</h3>
+            <ol class="list-decimal list-inside text-sm text-blue-700 space-y-1">
+                <li><strong>Verificar servidor:</strong> Asegúrate que tu servidor esté corriendo en 190.150.201.118:300</li>
+                <li><strong>Configurar HTTPS:</strong> El subdominio debe servir con certificado SSL válido</li>
+                <li><strong>Verificar DNS:</strong> El registro A para api-oculto-9k7s.aaleddyy.app debe estar propagado</li>
+                <li><strong>Configurar CORS:</strong> Tu API debe permitir requests desde www.aaleddyy.app</li>
+                <li><strong>Firewall:</strong> Asegúrate que el puerto 300 esté abierto</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Detectar configuración actual
+        function updateSystemInfo() {
+            document.getElementById('current-hostname').textContent = window.location.hostname;
+            document.getElementById('current-protocol').textContent = window.location.protocol;
+            document.getElementById('user-agent').textContent = navigator.userAgent.split(' ')[0];
+            document.getElementById('timestamp').textContent = new Date().toLocaleString();
+            
+            // Determinar API a usar
+            const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+                ? 'http://localhost:3000' 
+                : 'https://api-oculto-9k7s.aaleddyy.app';
+            
+            document.getElementById('selected-api').textContent = API;
+        }
+        
+        function updateStatus(elementId, status, message) {
+            const element = document.getElementById(elementId);
+            const colors = {
+                testing: 'bg-yellow-100 text-yellow-800',
+                success: 'bg-green-100 text-green-800',
+                error: 'bg-red-100 text-red-800'
+            };
+            
+            element.className = `px-2 py-1 rounded text-xs ${colors[status]}`;
+            element.textContent = message;
+        }
+        
+        function addTestResult(title, details, success) {
+            const resultsDiv = document.getElementById('test-results');
+            const resultDiv = document.createElement('div');
+            const bgColor = success ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200';
+            const textColor = success ? 'text-green-800' : 'text-red-800';
+            
+            resultDiv.className = `border rounded-lg p-4 ${bgColor}`;
+            resultDiv.innerHTML = `
+                <h4 class="font-semibold ${textColor} mb-2">${success ? '✅' : '❌'} ${title}</h4>
+                <pre class="text-sm ${textColor} whitespace-pre-wrap">${details}</pre>
+                <p class="text-xs ${textColor} mt-2">Tiempo: ${new Date().toLocaleTimeString()}</p>
+            `;
+            
+            resultsDiv.appendChild(resultDiv);
+        }
+        
+        async function testAPI(url, name, statusElementId) {
+            updateStatus(statusElementId, 'testing', '🔄 Probando...');
+            
+            try {
+                console.log(`Testing ${name} at: ${url}`);
+                
+                const startTime = Date.now();
+                const response = await fetch(`${url}/workspaces`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    mode: 'cors'
+                });
+                const endTime = Date.now();
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                const responseTime = endTime - startTime;
+                
+                updateStatus(statusElementId, 'success', '✅ Conectado');
+                addTestResult(
+                    `${name} - Conexión Exitosa`,
+                    `URL: ${url}\nTiempo de respuesta: ${responseTime}ms\nWorkspace ID: ${data.workspace_id}\nRespuesta completa: ${JSON.stringify(data, null, 2)}`,
+                    true
+                );
+                
+                return data;
+                
+            } catch (error) {
+                console.error(`Error testing ${name}:`, error);
+                updateStatus(statusElementId, 'error', '❌ Error');
+                addTestResult(
+                    `${name} - Error de Conexión`,
+                    `URL: ${url}\nError: ${error.message}\nDetalles: ${error.stack || 'No disponible'}`,
+                    false
+                );
+                
+                return null;
+            }
+        }
+        
+        // Event listeners
+        document.getElementById('test-local').addEventListener('click', () => {
+            testAPI('http://localhost:3000', 'API Local', 'local-status');
+        });
+        
+        document.getElementById('test-prod').addEventListener('click', () => {
+            testAPI('https://api-oculto-9k7s.aaleddyy.app', 'API Producción', 'prod-status');
+        });
+        
+        // Inicializar
+        updateSystemInfo();
+        
+        // Auto-test basado en el entorno
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            // En local, probar API local automáticamente
+            setTimeout(() => {
+                testAPI('http://localhost:3000', 'API Local', 'local-status');
+            }, 1000);
+        } else {
+            // En producción, probar API de producción automáticamente
+            setTimeout(() => {
+                testAPI('https://api-oculto-9k7s.aaleddyy.app', 'API Producción', 'prod-status');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

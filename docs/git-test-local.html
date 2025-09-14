@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Test Local - PurrCrafter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-2xl font-bold mb-4">🧪 Test de Conexión Local</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="bg-blue-50 p-4 rounded-lg">
+                <h3 class="font-semibold text-blue-800">🔧 Configuración</h3>
+                <p class="text-sm text-blue-600 mt-1">
+                    <strong>API Local:</strong> http://localhost:3000<br>
+                    <strong>Estado:</strong> <span id="local-status">Probando...</span>
+                </p>
+            </div>
+            
+            <div class="bg-red-50 p-4 rounded-lg">
+                <h3 class="font-semibold text-red-800">⚠️ Problema Detectado</h3>
+                <p class="text-sm text-red-600 mt-1">
+                    <strong>Dominio:</strong> aaleddyy.app<br>
+                    <strong>Estado:</strong> ❌ No resuelve DNS
+                </p>
+            </div>
+        </div>
+        
+        <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-lg mb-4">
+            <h3 class="font-semibold text-yellow-800 mb-2">📋 Soluciones Recomendadas:</h3>
+            <ol class="list-decimal list-inside text-sm text-yellow-700 space-y-1">
+                <li><strong>Configurar dominio:</strong> Asegúrate de que aaleddyy.app apunte a tu servidor</li>
+                <li><strong>Verificar DNS:</strong> Usa herramientas como nslookup o dig</li>
+                <li><strong>Configurar HTTPS:</strong> Tu dominio necesita SSL/TLS</li>
+                <li><strong>Actualizar backend:</strong> Configurar CORS para el dominio</li>
+            </ol>
+        </div>
+        
+        <button id="test-local" class="w-full bg-blue-500 text-white py-3 px-4 rounded hover:bg-blue-600 mb-4">
+            🧪 Probar Conexión Local
+        </button>
+        
+        <button id="test-upload" class="w-full bg-green-500 text-white py-3 px-4 rounded hover:bg-green-600 disabled:bg-gray-400" disabled>
+            📤 Probar Subida de Archivo
+        </button>
+        
+        <div id="results" class="mt-6 space-y-4">
+            <!-- Resultados aparecerán aquí -->
+        </div>
+    </div>
+
+    <script>
+        const API_LOCAL = 'http://localhost:3000';
+        let workspaceId = null;
+        
+        function addResult(title, content, type = 'info') {
+            const resultsDiv = document.getElementById('results');
+            const colors = {
+                success: 'bg-green-50 border-green-200 text-green-800',
+                error: 'bg-red-50 border-red-200 text-red-800',
+                info: 'bg-blue-50 border-blue-200 text-blue-800'
+            };
+            
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `p-4 rounded-lg border ${colors[type]}`;
+            resultDiv.innerHTML = `
+                <h4 class="font-semibold mb-2">${title}</h4>
+                <pre class="text-sm whitespace-pre-wrap">${content}</pre>
+            `;
+            resultsDiv.appendChild(resultDiv);
+        }
+        
+        async function testLocalConnection() {
+            document.getElementById('local-status').textContent = 'Conectando...';
+            
+            try {
+                console.log('Testing local API...');
+                const response = await fetch(`${API_LOCAL}/workspaces`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                workspaceId = data.workspace_id;
+                
+                document.getElementById('local-status').textContent = '✅ Conectado';
+                document.getElementById('test-upload').disabled = false;
+                
+                addResult(
+                    '✅ Conexión Local Exitosa',
+                    `Workspace creado: ${workspaceId}\nRespuesta: ${JSON.stringify(data, null, 2)}`,
+                    'success'
+                );
+                
+            } catch (error) {
+                document.getElementById('local-status').textContent = '❌ Error';
+                addResult(
+                    '❌ Error de Conexión Local',
+                    `Error: ${error.message}\nVerifica que el servidor esté corriendo en el puerto 3000`,
+                    'error'
+                );
+            }
+        }
+        
+        async function testFileUpload() {
+            if (!workspaceId) {
+                addResult('⚠️ No hay Workspace', 'Primero debes probar la conexión local', 'error');
+                return;
+            }
+            
+            // Crear un archivo de prueba simple
+            const testContent = '%PDF-1.4\n%Test PDF content';
+            const testFile = new Blob([testContent], { type: 'application/pdf' });
+            const formData = new FormData();
+            formData.append('file', testFile, 'test.pdf');
+            
+            try {
+                const response = await fetch(`${API_LOCAL}/workspaces/${workspaceId}/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                addResult(
+                    '✅ Subida de Archivo Exitosa',
+                    `Archivo subido correctamente\nRespuesta: ${JSON.stringify(result, null, 2)}`,
+                    'success'
+                );
+                
+            } catch (error) {
+                addResult(
+                    '❌ Error en Subida de Archivo',
+                    `Error: ${error.message}`,
+                    'error'
+                );
+            }
+        }
+        
+        document.getElementById('test-local').addEventListener('click', testLocalConnection);
+        document.getElementById('test-upload').addEventListener('click', testFileUpload);
+        
+        // Probar automáticamente al cargar
+        testLocalConnection();
+    </script>
+</body>
+</html>

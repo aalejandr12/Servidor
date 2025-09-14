@@ -22,11 +22,12 @@ STORAGE_DIR.mkdir(parents=True, exist_ok=True)
 
 # Cambia estos orígenes por TU GitHub Pages y/o tu dominio
 ALLOWED_ORIGINS = [
-    "https://aaleddy.app",             # Dominio principal
-    "https://www.aaleddy.app",         # Con www
-    "https://*.aaleddy.app",           # Subdominios
+    "https://aaleddyy.app",             # Dominio principal
+    "https://www.aaleddyy.app",         # Con www
+    "https://*.aaleddyy.app",           # Subdominios
     "http://localhost:5173",           # útil si haces pruebas locales de front
     "http://localhost:3000",           # útil para pruebas
+    "http://127.0.0.1:5500",           # Live Server
     "*"                                # Temporal para debugging
 ]
 
