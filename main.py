@@ -1,7 +1,7 @@
 # main.py
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, Response
 from pydantic import BaseModel, Field
 from typing import List, Dict, Optional, Literal
 from pathlib import Path
@@ -10,6 +10,7 @@ import aiofiles
 import re
 import json
 import uuid
+from datetime import datetime
 
 # Importar módulos especializados
 from pdf_extractor_filename import build_filename_index
@@ -25,6 +26,7 @@ ALLOWED_ORIGINS = [
     "https://aaleddyy.app",             # Dominio principal
     "https://www.aaleddyy.app",         # Con www
     "https://*.aaleddyy.app",           # Subdominios
+    "https://aalejandr12.github.io",    # GitHub Pages del usuario
     "http://localhost:5173",           # útil si haces pruebas locales de front
     "http://localhost:3000",           # útil para pruebas
     "http://127.0.0.1:5500",           # Live Server
@@ -39,7 +41,7 @@ app = FastAPI(title="PDF Organizer API - Genérico", version="2.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Temporal para debugging
+    allow_origins=ALLOWED_ORIGINS,  # Usar la lista específica de orígenes
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -350,3 +352,326 @@ def download(ws_id: str, filename: str):
     if not path.exists():
         raise HTTPException(status_code=404, detail="Archivo no encontrado.")
     return FileResponse(path, media_type="application/pdf", filename=filename)
+
+# ========= ENDPOINTS JSONP =========
+
+def _jsonp_response(data: dict, callback: str):
+    """Helper para crear respuestas JSONP"""
+    jsonp_response = f"{callback}({json.dumps(data)});"
+    return Response(
+        content=jsonp_response,
+        media_type="application/javascript",
+        headers={"Cache-Control": "no-cache"}
+    )
+
+@app.get("/jsonp/workspaces")
+def create_workspace_jsonp(callback: str = Query(..., description="JSONP callback function")):
+    """Crear workspace vía JSONP."""
+    ws_id = uuid.uuid4().hex[:10]
+    workspace_dir = _ws_dir(ws_id)
+    
+    response_data = {
+        "success": True,
+        "workspace_id": ws_id,
+        "created_at": datetime.now().isoformat(),
+        "status": "active"
+    }
+    
+    return _jsonp_response(response_data, callback)
+
+@app.get("/jsonp/workspaces/{workspace_id}/order-by-filename")
+def order_by_filename_jsonp(
+    workspace_id: str, 
+    callback: str = Query(..., description="JSONP callback function"),
+    order_list: str = Query("", description="Lista de bases separadas por comas")
+):
+    """Ordenar PDFs por nombre de archivo con orden específico vía JSONP"""
+    try:
+        ws_dir = _ws_dir(workspace_id)
+        uploads_dir = _uploads_dir(workspace_id)
+        
+        if not uploads_dir.exists():
+            return _jsonp_response({"success": False, "error": "Workspace no encontrado"}, callback)
+        
+        # Si no se especifica orden, procesar todos automáticamente
+        if not order_list.strip():
+            return _process_all_files_by_name(workspace_id, uploads_dir, ws_dir, callback)
+        
+        # Procesar según orden específico
+        bases_ordenadas = [base.strip() for base in order_list.split(',') if base.strip()]
+        
+        # Crear PDF unificado siguiendo el orden especificado
+        pdf_writer = PdfWriter()
+        total_pages = 0
+        bases_procesadas = 0
+        archivos_procesados = []
+        
+        for base in bases_ordenadas:
+            partes = _find_parts(base, uploads_dir)
+            
+            if not partes:
+                # Buscar archivo simple
+                simple_file = uploads_dir / f"{base}.pdf"
+                if simple_file.exists():
+                    partes = [simple_file]
+            
+            if not partes:
+                continue
+            
+            bases_procesadas += 1
+            for pdf_path in partes:
+                try:
+                    pdf_reader = PdfReader(pdf_path)
+                    for page in pdf_reader.pages:
+                        pdf_writer.add_page(page)
+                    total_pages += len(pdf_reader.pages)
+                    archivos_procesados.append(pdf_path.name)
+                except Exception as e:
+                    print(f"Error procesando {pdf_path.name}: {e}")
+        
+        if total_pages == 0:
+            return _jsonp_response({"success": False, "error": "No se encontraron archivos para las bases especificadas"}, callback)
+        
+        # Guardar resultado con timestamp
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_filename = f"resultado_nombre_{workspace_id}_{timestamp}.pdf"
+        output_path = ws_dir / output_filename
+        
+        with output_path.open("wb") as output_file:
+            pdf_writer.write(output_file)
+        
+        # URL del resultado
+        pdf_url = f"/workspaces/{workspace_id}/download/{output_filename}"
+        
+        response_data = {
+            "success": True,
+            "data": {
+                "pdf_url": pdf_url,
+                "total_bases": bases_procesadas,
+                "total_pages": total_pages,
+                "timestamp": datetime.now().isoformat()
+            }
+        }
+        
+        return _jsonp_response(response_data, callback)
+        
+    except Exception as e:
+        return _jsonp_response({"success": False, "error": str(e)}, callback)
+
+@app.get("/jsonp/workspaces/{workspace_id}/order-by-content")
+def order_by_content_jsonp(
+    workspace_id: str, 
+    callback: str = Query(..., description="JSONP callback function"),
+    codigo_list: str = Query("", description="Lista de códigos separados por comas")
+):
+    """Ordenar PDFs por contenido con orden específico vía JSONP"""
+    try:
+        ws_dir = _ws_dir(workspace_id)
+        uploads_dir = _uploads_dir(workspace_id)
+        
+        if not uploads_dir.exists():
+            return _jsonp_response({"success": False, "error": "Workspace no encontrado"}, callback)
+        
+        # Si no se especifica orden, hacer escaneo automático
+        if not codigo_list.strip():
+            return _process_all_files_by_content(workspace_id, uploads_dir, ws_dir, callback)
+        
+        # Procesar según lista específica
+        codigos_solicitados = []
+        for codigo_raw in codigo_list.split(','):
+            codigo_raw = codigo_raw.strip()
+            if not codigo_raw:
+                continue
+            # Normalizar: mayúsculas, quitar espacios/guiones/guiones bajos
+            codigo_norm = re.sub(r"[\s_-]", "", codigo_raw.upper())
+            if codigo_norm not in codigos_solicitados:
+                codigos_solicitados.append(codigo_norm)
+        
+        if not codigos_solicitados:
+            return _jsonp_response({"success": False, "error": "No se especificaron códigos válidos"}, callback)
+        
+        # Patrón genérico para cualquier código alfanumérico
+        CODE_REGEX = re.compile(r"\b[A-Za-z]{2,}[-_ ]?\d{1,}[A-Za-z0-9]*\b", re.IGNORECASE)
+        
+        # Indexar páginas por código
+        mapa_codigo_a_pagina = {}
+        pdf_files = list(uploads_dir.glob("*.pdf"))
+        
+        for pdf_path in pdf_files:
+            try:
+                reader = PdfReader(pdf_path)
+                
+                for page_idx in range(len(reader.pages)):
+                    try:
+                        text = reader.pages[page_idx].extract_text() or ""
+                    except Exception:
+                        text = ""
+                    
+                    # Buscar códigos en el texto
+                    for match in CODE_REGEX.finditer(text):
+                        codigo_raw = match.group(0)
+                        codigo = re.sub(r"[\s_-]", "", codigo_raw.upper())
+                        
+                        # Guardar primera ocurrencia por código
+                        if codigo not in mapa_codigo_a_pagina:
+                            mapa_codigo_a_pagina[codigo] = {
+                                "file": pdf_path.name,
+                                "page": page_idx,
+                                "reader": reader
+                            }
+                            break
+                
+            except Exception as e:
+                print(f"Error procesando {pdf_path.name}: {e}")
+        
+        # Seleccionar páginas según el listado
+        pdf_writer = PdfWriter()
+        paginas_agregadas = []
+        faltantes = []
+        
+        for codigo in codigos_solicitados:
+            if codigo in mapa_codigo_a_pagina:
+                info = mapa_codigo_a_pagina[codigo]
+                try:
+                    pdf_writer.add_page(info["reader"].pages[info["page"]])
+                    paginas_agregadas.append((codigo, info["page"] + 1))
+                except Exception as e:
+                    print(f"Error agregando página para código {codigo}: {e}")
+                    faltantes.append(codigo)
+            else:
+                faltantes.append(codigo)
+        
+        if len(paginas_agregadas) == 0:
+            return _jsonp_response({"success": False, "error": f"No se encontraron códigos válidos. Faltantes: {', '.join(faltantes)}"}, callback)
+        
+        # Guardar resultado
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_filename = f"resultado_contenido_{workspace_id}_{timestamp}.pdf"
+        output_path = ws_dir / output_filename
+        
+        with output_path.open("wb") as output_file:
+            pdf_writer.write(output_file)
+        
+        # URL del resultado
+        pdf_url = f"/workspaces/{workspace_id}/download/{output_filename}"
+        
+        response_data = {
+            "success": True,
+            "data": {
+                "pdf_url": pdf_url,
+                "total_codigos": len(paginas_agregadas),
+                "total_pages": len(paginas_agregadas),
+                "timestamp": datetime.now().isoformat(),
+                "faltantes": faltantes if faltantes else None
+            }
+        }
+        
+        return _jsonp_response(response_data, callback)
+        
+    except Exception as e:
+        return _jsonp_response({"success": False, "error": str(e)}, callback)
+
+def _process_all_files_by_name(workspace_id: str, uploads_dir: Path, ws_dir: Path, callback: str):
+    """Procesar todos los archivos automáticamente por nombre"""
+    pdf_files = list(uploads_dir.glob("*.pdf"))
+    
+    # Lógica simple: ordenar alfabéticamente
+    pdf_files.sort(key=lambda p: p.name.lower())
+    
+    pdf_writer = PdfWriter()
+    total_pages = 0
+    
+    for pdf_path in pdf_files:
+        try:
+            pdf_reader = PdfReader(pdf_path)
+            for page in pdf_reader.pages:
+                pdf_writer.add_page(page)
+            total_pages += len(pdf_reader.pages)
+        except Exception as e:
+            print(f"Error procesando {pdf_path.name}: {e}")
+    
+    # Guardar resultado
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_filename = f"resultado_nombre_{workspace_id}_{timestamp}.pdf"
+    output_path = ws_dir / output_filename
+    
+    with output_path.open("wb") as output_file:
+        pdf_writer.write(output_file)
+    
+    pdf_url = f"/workspaces/{workspace_id}/download/{output_filename}"
+    response_data = {
+        "success": True,
+        "data": {
+            "pdf_url": pdf_url,
+            "total_files": len(pdf_files),
+            "total_pages": total_pages,
+            "timestamp": datetime.now().isoformat()
+        }
+    }
+    
+    return _jsonp_response(response_data, callback)
+
+def _process_all_files_by_content(workspace_id: str, uploads_dir: Path, ws_dir: Path, callback: str):
+    """Procesar todos los archivos automáticamente por contenido"""
+    CODE_REGEX = re.compile(r"\b[A-Za-z]{2,}[-_ ]?\d{1,}[A-Za-z0-9]*\b", re.IGNORECASE)
+    mapa_codigo_a_pagina = {}
+    pdf_files = list(uploads_dir.glob("*.pdf"))
+    
+    for pdf_path in pdf_files:
+        try:
+            reader = PdfReader(pdf_path)
+            for page_idx in range(len(reader.pages)):
+                try:
+                    text = reader.pages[page_idx].extract_text() or ""
+                except Exception:
+                    text = ""
+                
+                for match in CODE_REGEX.finditer(text):
+                    codigo_raw = match.group(0)
+                    codigo = re.sub(r"[\s_-]", "", codigo_raw.upper())
+                    
+                    if codigo not in mapa_codigo_a_pagina:
+                        mapa_codigo_a_pagina[codigo] = {
+                            "file": pdf_path.name,
+                            "page": page_idx,
+                            "reader": reader
+                        }
+        except Exception as e:
+            print(f"Error procesando {pdf_path.name}: {e}")
+    
+    # Crear PDF unificado
+    pdf_writer = PdfWriter()
+    codigos_ordenados = sorted(mapa_codigo_a_pagina.keys())
+    
+    for codigo in codigos_ordenados:
+        info = mapa_codigo_a_pagina[codigo]
+        try:
+            pdf_writer.add_page(info["reader"].pages[info["page"]])
+        except Exception as e:
+            print(f"Error agregando página para código {codigo}: {e}")
+    
+    # Guardar resultado
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_filename = f"resultado_contenido_{workspace_id}_{timestamp}.pdf"
+    output_path = ws_dir / output_filename
+    
+    with output_path.open("wb") as output_file:
+        pdf_writer.write(output_file)
+    
+    pdf_url = f"/workspaces/{workspace_id}/download/{output_filename}"
+    response_data = {
+        "success": True,
+        "data": {
+            "pdf_url": pdf_url,
+            "total_codigos": len(mapa_codigo_a_pagina),
+            "total_pages": len(codigos_ordenados),
+            "timestamp": datetime.now().isoformat()
+        }
+    }
+    
+    return _jsonp_response(response_data, callback)
+
+# ========= EJECUTAR SERVIDOR =========
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=3002)

@@ -1,0 +1,1496 @@
+<!DOCTYPE html><!DOCTYPE html><!DOCTYPE html>
+
+<html lang="es">
+
+<head><html lang="es"><html lang="es">
+
+    <meta charset="utf-8"/>
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/><head><head>
+
+    <title>Unir PDF por Contenido - PurrCrafter</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1897264775520223"    <meta charset="utf-8"/>    <meta charset="utf-8"/>
+
+         crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>    <title>Unir PDF por Contenido - PurrCrafter</title>    <title>Unir PDF por Contenido - PurrCrafter</title>
+
+    <style type="text/tailwindcss">
+
+        :root {    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1897264775520223"    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+            --bg-color: #FFFFFF;
+
+            --text-color: #1F2937;         crossorigin="anonymous"></script>    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+
+            --primary-color: #2563EB;
+
+            --secondary-color: #F9FAFB;    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+            --accent-color: #3B82F6;
+
+            --border-color: #E5E7EB;    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>    <style type="text/tailwindcss">
+
+            --text-muted-color: #6B7280;
+
+        }    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>        :root {
+
+        body {
+
+            font-family: 'Poppins', sans-serif;    <style type="text/tailwindcss">            --bg-color: #FFFFFF;
+
+            background-color: var(--bg-color);
+
+            color: var(--text-color);        :root {            --text-color: #1F2937;
+
+        }
+
+        .purr-button {            --bg-color: #FFFFFF;            --primary-color: #2563EB;
+
+            transition: all 0.3s ease-in-out;
+
+            background-color: var(--primary-color);            --text-color: #1F2937;            --secondary-color: #F9FAFB;
+
+        }
+
+        .purr-button:hover:not(:disabled) {            --primary-color: #2563EB;            --accent-color: #3B82F6;
+
+            transform: scale(1.05);
+
+            background-color: var(--accent-color);            --secondary-color: #F9FAFB;            --border-color: #E5E7EB;
+
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+
+        }            --accent-color: #3B82F6;            --text-muted-color: #6B7280;
+
+        .file-item:hover {
+
+            background-color: #F3F4F6;            --border-color: #E5E7EB;            --success-color: #10B981;
+
+            border-color: var(--accent-color);
+
+        }            --text-muted-color: #6B7280;        }
+
+        .file-item {
+
+            transition: all 0.2s ease-in-out;            --success-color: #10B981;        body {
+
+        }
+
+        #main-action-button .button-content { display: flex; align-items: center; justify-content: center; }        }            font-family: 'Poppins', sans-serif;
+
+        #main-action-button .progress-container { display: none; }
+
+        #main-action-button .success-icon { display: none; }        body {            background-color: var(--bg-color);
+
+        #main-action-button.loading .button-text,
+
+        #main-action-button.loading .button-icon {            font-family: 'Poppins', sans-serif;            color: var(--text-color);
+
+            display: none;
+
+        }            background-color: var(--bg-color);        }
+
+        #main-action-button.loading .progress-container {
+
+            display: flex;            color: var(--text-color);        .purr-button {
+
+            flex-direction: column;
+
+            align-items: center;        }            transition: all 0.3s ease-in-out;
+
+            width: 100%;
+
+            height: 100%;        .purr-button {            background-color: var(--primary-color);
+
+            justify-content: center;
+
+        }            transition: all 0.3s ease-in-out;        }
+
+        #main-action-button .progress-bar-bg {
+
+            width: 100%;            background-color: var(--primary-color);        .purr-button:hover:not(:disabled) {
+
+            height: 8px;
+
+            background-color: #374151;        }            transform: scale(1.05);
+
+            border-radius: 4px;
+
+            overflow: hidden;        .purr-button:hover:not(:disabled) {            background-color: var(--accent-color);
+
+            margin-bottom: 8px;
+
+        }            transform: scale(1.05);            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+
+        #main-action-button .progress-bar {
+
+            height: 100%;            background-color: var(--accent-color);        }
+
+            background: linear-gradient(45deg, #3B82F6, #1D4ED8);
+
+            border-radius: 4px;            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);        .file-item:hover {
+
+            transition: width 0.3s ease;
+
+            width: 0%;        }            background-color: #F3F4F6;
+
+        }
+
+        #main-action-button .progress-text {        .file-item:hover {            border-color: var(--accent-color);
+
+            color: white;
+
+            font-size: 14px;            background-color: #F3F4F6;        }
+
+            font-weight: 500;
+
+            text-align: center;            border-color: var(--accent-color);        .file-item {
+
+        }
+
+        #main-action-button.success {        }             transition: all 0.2s ease-in-out;
+
+            background-color: #10B981;
+
+            transform: scale(1.05);        .file-item {        }
+
+            animation: success-pop 0.3s ease-in-out;
+
+        }             transition: all 0.2s ease-in-out;        #main-action-button .button-content { display: flex; align-items: center; justify-content: center; }
+
+        #main-action-button.success .button-content,
+
+        #main-action-button.success .progress-container {        }        #main-action-button .progress-container { display: none; }
+
+            display: none;
+
+        }        #main-action-button .button-content { display: flex; align-items: center; justify-content: center; }        #main-action-button .success-icon { display: none; }
+
+        #main-action-button.success .success-icon {
+
+            display: flex;        #main-action-button .progress-container { display: none; }        #main-action-button.loading .button-text,
+
+            animation: success-pop 0.3s ease-in-out;
+
+        }        #main-action-button .success-icon { display: none; }        #main-action-button.loading .button-icon {
+
+        @keyframes success-pop {
+
+            0% { transform: scale(1); }        #main-action-button.loading .button-text,            display: none;
+
+            50% { transform: scale(1.1); }
+
+            100% { transform: scale(1.05); }        #main-action-button.loading .button-icon {        }
+
+        }
+
+        .files-section {            display: none;        #main-action-button.loading .progress-container {
+
+            display: none;
+
+        }        }            display: block;
+
+        .files-section.show {
+
+            display: block;        #main-action-button.loading .progress-container {            width: 100%;
+
+        }
+
+    </style>            display: block;            height: 100%;
+
+</head>
+
+<body class="antialiased">            width: 100%;            display: flex;
+
+    <div class="container mx-auto px-4 min-h-screen flex flex-col items-center pt-10">
+
+        <header class="text-center w-full max-w-4xl mb-8">            height: 100%;            align-items: center;
+
+            <a class="inline-block mb-6 text-[var(--primary-color)] hover:text-[var(--accent-color)] transition-colors" href="index.html">
+
+                <div class="flex items-center space-x-2">            display: flex;            justify-content: center;
+
+                    <span class="material-symbols-outlined">arrow_back</span>
+
+                    <span>Volver a Inicio</span>            align-items: center;            position: relative;
+
+                </div>
+
+            </a>            justify-content: center;        }
+
+            <h1 class="text-4xl md:text-5xl font-bold text-[var(--text-color)] drop-shadow-sm">Unir PDF por Contenido</h1>
+
+            <p class="text-lg text-[var(--text-muted-color)] mt-2">Combina tus archivos PDF organizándolos por el contenido interno</p>            position: relative;        #main-action-button .progress-bar-bg {
+
+        </header>
+
+        }            position: absolute;
+
+        <!-- Bloque de anuncios AdSense -->
+
+        <div class="w-full max-w-4xl mb-8 flex justify-center">        #main-action-button .progress-bar-bg {            top: 0;
+
+            <!-- PurrCrafter -->
+
+            <ins class="adsbygoogle"            position: absolute;            left: 0;
+
+                 style="display:block"
+
+                 data-ad-client="ca-pub-1897264775520223"            top: 0;            width: 100%;
+
+                 data-ad-slot="7931434015"
+
+                 data-ad-format="auto"            left: 0;            height: 100%;
+
+                 data-full-width-responsive="true"></ins>
+
+            <script>            width: 100%;            background-color: var(--accent-color);
+
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+
+            </script>            height: 100%;            opacity: 0.3;
+
+        </div>
+
+            background-color: var(--accent-color);            border-radius: 0.75rem;
+
+        <main class="w-full max-w-4xl flex-grow">
+
+            <div class="bg-[var(--secondary-color)] rounded-2xl border border-[var(--border-color)] p-6 md:p-10 shadow-sm">            opacity: 0.3;        }
+
+                <!-- Zona de carga de archivos -->
+
+                <div class="border-2 border-dashed border-[var(--border-color)] rounded-xl p-8 text-center hover:border-[var(--accent-color)] hover:bg-blue-50 transition-all duration-300 cursor-pointer" id="upload-zone">            border-radius: 0.75rem;        #main-action-button .progress-bar {
+
+                    <input type="file" id="file-upload" class="hidden" multiple accept=".pdf">
+
+                    <div class="flex flex-col items-center space-y-4">        }            position: absolute;
+
+                        <div class="bg-[var(--primary-color)] p-4 rounded-full">
+
+                            <span class="material-symbols-outlined text-white text-4xl">upload_file</span>        #main-action-button .progress-bar {            top: 0;
+
+                        </div>
+
+                        <div>            position: absolute;            left: 0;
+
+                            <h3 class="text-xl font-semibold text-[var(--text-color)] mb-2">Arrastra tus PDFs aquí</h3>
+
+                            <p class="text-[var(--text-muted-color)]">o haz clic para seleccionar archivos</p>            top: 0;            height: 100%;
+
+                        </div>
+
+                        <div class="text-xs text-[var(--text-muted-color)]">            left: 0;            background-color: var(--accent-color);
+
+                            Solo archivos PDF • Máximo 50MB por archivo
+
+                        </div>            height: 100%;            border-radius: 0.75rem;
+
+                    </div>
+
+                </div>            background-color: var(--accent-color);            transition: width 0.3s ease;
+
+
+
+                <!-- Sección de archivos cargados -->            border-radius: 0.75rem;        }
+
+                <div class="files-section mt-8" id="files-section">
+
+                    <div class="flex justify-between items-center mb-4">            transition: width 0.5s ease-out;        #main-action-button .progress-text {
+
+                        <h3 class="text-lg font-semibold text-[var(--text-color)]">Archivos cargados</h3>
+
+                        <span class="text-sm text-[var(--text-muted-color)]" id="files-count">0 archivos</span>        }            position: relative;
+
+                    </div>
+
+                    <div class="space-y-3" id="files-list">        #main-action-button .progress-text {            z-index: 10;
+
+                        <!-- Lista de archivos se genera dinámicamente -->
+
+                    </div>            position: relative;            font-weight: 600;
+
+                </div>
+
+            z-index: 10;            color: white;
+
+                <!-- Sección de ordenamiento personalizado -->
+
+                <div class="files-section mt-8" id="mia-order-section">            color: white;            font-size: 1.25rem;
+
+                    <h3 class="text-lg font-semibold text-[var(--text-color)] mb-4">🧠 Ordenamiento Inteligente (Opcional)</h3>
+
+                    <p class="text-sm text-[var(--text-muted-color)] mb-4">            font-weight: 600;        }
+
+                        Si tienes códigos específicos para organizar los PDFs, escríbelos aquí. De lo contrario, se extraerán automáticamente:
+
+                    </p>            font-size: 1.25rem;        #main-action-button.success {
+
+                    <textarea 
+
+                        id="mia-input"         }             background-color: var(--success-color) !important;
+
+                        class="w-full h-32 p-4 border border-[var(--border-color)] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:border-transparent"
+
+                        placeholder="Ejemplo:        #main-action-button.success {             transform: scale(1.0) !important;
+
+CB2225756406
+
+LIO000044043205             background-color: var(--success-color) !important;             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2) !important;
+
+ABC123456
+
+XYZ789012             transform: scale(1.0) !important;        }
+
+
+
+Escribe un código por línea en el orden deseado..."></textarea>             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2) !important;        #main-action-button.success .button-content,
+
+                    <p class="text-xs text-[var(--text-muted-color)] mt-2">
+
+                        💡 <strong>Tip:</strong> Acepta cualquier código alfanumérico. Si no especificas códigos, se extraerán automáticamente todos los encontrados en orden alfabético.        }        #main-action-button.success .progress-container {
+
+                    </p>
+
+                </div>        #main-action-button.success .button-content,            display: none;
+
+
+
+                <!-- Botón de acción principal -->        #main-action-button.success .progress-container {        }
+
+                <div class="mt-8 pt-6 border-t border-[var(--border-color)] text-center">
+
+                    <button class="w-full max-w-md purr-button text-white px-8 py-4 rounded-xl font-semibold text-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-[var(--accent-color)] flex items-center justify-center mx-auto disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none min-h-[64px]" id="main-action-button" disabled>            display: none;        #main-action-button.success .success-icon {
+
+                        <div class="button-content">
+
+                            <span class="material-symbols-outlined mr-2 button-icon">auto_awesome</span>        }            display: block;
+
+                            <span class="button-text">Unir PDFs por Contenido</span>
+
+                        </div>        #main-action-button.success .success-icon {            animation: success-pop 0.3s ease-out;
+
+                        <div class="progress-container">
+
+                            <div class="progress-bar-bg">            display: block;        }
+
+                                <div class="progress-bar"></div>
+
+                            </div>            animation: success-pop 0.3s ease-out;        @keyframes success-pop {
+
+                            <div class="progress-text">Procesando...</div>
+
+                        </div>        }            0% { transform: scale(0.5); opacity: 0; }
+
+                        <div class="success-icon items-center justify-center">
+
+                            <span class="material-symbols-outlined text-2xl">check_circle</span>        @keyframes success-pop {            80% { transform: scale(1.1); }
+
+                            <span class="ml-2">¡Completado!</span>
+
+                        </div>            0% { transform: scale(0.5); opacity: 0; }            100% { transform: scale(1); opacity: 1; }
+
+                    </button>
+
+                </div>            80% { transform: scale(1.1); }        }
+
+            </div>
+
+        </main>            100% { transform: scale(1); opacity: 1; }    </style>
+
+
+
+        <footer class="w-full max-w-4xl py-8 mt-12 text-center text-sm text-[var(--text-muted-color)]">        }</head>
+
+            <div class="flex justify-center space-x-6 mb-4">
+
+                <a class="hover:text-[var(--accent-color)] transition-colors" href="terminos.html">Términos y Condiciones</a>        .files-section {<body class="antialiased">
+
+                <a class="hover:text-[var(--accent-color)] transition-colors" href="privacidad.html">Privacidad</a>
+
+                <a class="hover:text-[var(--accent-color)] transition-colors" href="#contacto">Contacto</a>            display: none;    <div class="container mx-auto px-4 min-h-screen flex flex-col items-center pt-10">
+
+            </div>
+
+            <p>© 2025 PurrCrafter. Todos los derechos reservados.</p>        }        <header class="text-center w-full max-w-4xl mb-8">
+
+        </footer>
+
+    </div>        .files-section.show {            <a class="inline-block mb-6 text-[var(--primary-color)] hover:text-[var(--accent-color)] transition-colors" href="home.html">
+
+
+
+    <script>            display: block;                <div class="flex items-center space-x-2">
+
+        // ========= CONFIGURACIÓN =========
+
+        const API = 'https://api-oculto-9k7s.aaleddy.app';        }                    <span class="material-symbols-outlined">arrow_back</span>
+
+        
+
+        // ========= ELEMENTOS DOM =========    </style>                    <span>Volver a Inicio</span>
+
+        const uploadZone = document.getElementById('upload-zone');
+
+        const fileInput = document.getElementById('file-upload');</head>                </div>
+
+        const filesSection = document.getElementById('files-section');
+
+        const miaOrderSection = document.getElementById('mia-order-section');<body class="antialiased">            </a>
+
+        const miaInput = document.getElementById('mia-input');
+
+        const filesCount = document.getElementById('files-count');    <div class="container mx-auto px-4 min-h-screen flex flex-col items-center pt-10">            <h1 class="text-4xl md:text-5xl font-bold text-[var(--text-color)] drop-shadow-sm">Unir PDF por Contenido</h1>
+
+        const filesList = document.getElementById('files-list');
+
+        const mainButton = document.getElementById('main-action-button');        <header class="text-center w-full max-w-4xl mb-8">            <p class="text-lg text-[var(--text-muted-color)] mt-2">Analiza el contenido y une tus archivos PDF según los códigos encontrados.</p>
+
+
+
+        // ========= ESTADO GLOBAL =========            <a class="inline-block mb-6 text-[var(--primary-color)] hover:text-[var(--accent-color)] transition-colors" href="index.html">        </header>
+
+        let uploadedFiles = [];
+
+        let workspaceId = null;                <div class="flex items-center space-x-2">        
+
+        let isProcessing = false;
+
+                    <span class="material-symbols-outlined">        <main class="w-full max-w-4xl flex-grow">
+
+        // ========= FUNCIONES UTILITARIAS =========
+
+        function formatFileSize(bytes) {                        arrow_back            <div class="bg-[var(--secondary-color)] rounded-2xl border border-[var(--border-color)] p-6 md:p-8 shadow-sm">
+
+            if (bytes === 0) return '0 Bytes';
+
+            const k = 1024;                    </span>                <div class="border-2 border-dashed border-[var(--border-color)] rounded-xl p-8 text-center flex flex-col items-center justify-center transition-colors duration-300 hover:border-[var(--accent-color)] hover:bg-blue-50/50">
+
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+
+            const i = Math.floor(Math.log(bytes) / Math.log(k));                    <span>Volver a Inicio</span>                    <span class="material-symbols-outlined text-6xl text-[var(--primary-color)] mb-4">upload_file</span>
+
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+
+        }                </div>                    <h2 class="text-xl font-semibold text-[var(--text-color)] mb-2">Arrastra y suelta tus archivos aquí</h2>
+
+
+
+        function jsonpRequest(url, callbackName) {            </a>                    <p class="text-[var(--text-muted-color)] mb-4">o</p>
+
+            return new Promise((resolve, reject) => {
+
+                const script = document.createElement('script');            <h1 class="text-4xl md:text-5xl font-bold text-[var(--text-color)] drop-shadow-sm">Unir PDF por Contenido</h1>                    <label class="cursor-pointer purr-button text-white px-6 py-3 rounded-xl font-semibold text-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-[var(--accent-color)]" for="file-upload">
+
+                const timeoutId = setTimeout(() => {
+
+                    cleanup();            <p class="text-lg text-[var(--text-muted-color)] mt-2">Sube archivos y ordénalos automáticamente por su contenido interno.</p>                        Seleccionar Archivos
+
+                    reject(new Error('Request timeout'));
+
+                }, 30000);        </header>                    </label>
+
+
+
+                function cleanup() {                    <input accept=".pdf" class="sr-only" id="file-upload" multiple="" name="file-upload" type="file"/>
+
+                    clearTimeout(timeoutId);
+
+                    document.head.removeChild(script);        <!-- Bloque de anuncios AdSense -->                    <p class="text-xs text-[var(--text-muted-color)] mt-4">Solo se permiten archivos PDF. El análisis de contenido puede tomar más tiempo.</p>
+
+                    delete window[callbackName];
+
+                }        <div class="w-full max-w-4xl mb-8 flex justify-center">                </div>
+
+
+
+                window[callbackName] = function(data) {            <!-- PurrCrafter -->                
+
+                    cleanup();
+
+                    resolve(data);            <ins class="adsbygoogle"                <div class="mt-8" id="files-section" style="display: none;">
+
+                };
+
+                 style="display:block"                    <div class="flex justify-between items-center mb-4">
+
+                script.onerror = function() {
+
+                    cleanup();                 data-ad-client="ca-pub-1897264775520223"                        <h3 class="text-lg font-medium text-[var(--text-color)]" id="files-count">Archivos Subidos (0)</h3>
+
+                    reject(new Error('Script loading failed'));
+
+                };                 data-ad-slot="2473509960"                        <div class="text-sm text-[var(--text-muted-color)]">
+
+
+
+                script.src = url;                 data-ad-format="auto"                            <span class="material-symbols-outlined text-lg align-middle">info</span>
+
+                document.head.appendChild(script);
+
+            });                 data-full-width-responsive="true"></ins>                            Analizando contenido...
+
+        }
+
+            <script>                        </div>
+
+        // ========= MANEJO DE ARCHIVOS =========
+
+        uploadZone.addEventListener('dragover', (e) => {                 (adsbygoogle = window.adsbygoogle || []).push({});                    </div>
+
+            e.preventDefault();
+
+            uploadZone.classList.add('border-[var(--accent-color)]', 'bg-blue-50');            </script>                    <div class="space-y-3" id="files-list">
+
+        });
+
+        </div>                        <!-- Los archivos se mostrarán aquí dinámicamente -->
+
+        uploadZone.addEventListener('dragleave', (e) => {
+
+            e.preventDefault();                    </div>
+
+            uploadZone.classList.remove('border-[var(--accent-color)]', 'bg-blue-50');
+
+        });        <main class="w-full max-w-4xl flex-grow">                </div>
+
+
+
+        uploadZone.addEventListener('drop', (e) => {            <div class="bg-[var(--secondary-color)] rounded-2xl border border-[var(--border-color)] p-6 md:p-8 shadow-sm">
+
+            e.preventDefault();
+
+            uploadZone.classList.remove('border-[var(--accent-color)]', 'bg-blue-50');                <!-- Zona de subida de archivos -->                <!-- Sección de orden de códigos -->
+
+            const files = Array.from(e.dataTransfer.files).filter(file => file.type === 'application/pdf');
+
+            handleFiles(files);                <div id="upload-zone" class="border-2 border-dashed border-[var(--border-color)] rounded-xl p-8 text-center flex flex-col items-center justify-center transition-colors duration-300 hover:border-[var(--accent-color)] hover:bg-blue-50/50">                <div class="mt-8 pt-6 border-t border-[var(--border-color)]" id="codes-section" style="display: none;">
+
+        });
+
+                    <span class="material-symbols-outlined text-6xl text-[var(--primary-color)] mb-4">                    <label class="block text-lg font-medium text-[var(--text-color)] mb-3" for="order-input">
+
+        fileInput.addEventListener('change', (e) => {
+
+            const files = Array.from(e.target.files);                        upload_file                        Códigos encontrados en el contenido
+
+            handleFiles(files);
+
+        });                    </span>                    </label>
+
+
+
+        async function handleFiles(files) {                    <h2 class="text-xl font-semibold text-[var(--text-color)] mb-2">Arrastra y suelta tus archivos aquí</h2>                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+
+            if (files.length === 0) {
+
+                alert('Por favor selecciona archivos PDF válidos.');                    <p class="text-[var(--text-muted-color)] mb-4">o</p>                        <div class="flex items-start space-x-2">
+
+                return;
+
+            }                    <label class="cursor-pointer purr-button text-white px-6 py-3 rounded-xl font-semibold text-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-[var(--accent-color)]" for="file-upload">                            <span class="material-symbols-outlined text-blue-600 mt-0.5">info</span>
+
+
+
+            uploadedFiles = files;                        Seleccionar Archivos                            <div class="text-sm text-blue-800">
+
+            updateFilesList();
+
+            filesSection.classList.add('show');                    </label>                                <strong>Análisis de contenido:</strong> Se han escaneado los PDFs buscando códigos alfanuméricos dentro del texto. 
+
+            miaOrderSection.classList.add('show');
+
+            updateMainButton();                    <input accept=".pdf" class="sr-only" id="file-upload" multiple name="file-upload" type="file"/>                                Puedes reordenar los códigos para cambiar el orden de unión.
+
+
+
+            // Auto-crear workspace al subir archivos                    <p class="text-xs text-[var(--text-muted-color)] mt-4">Solo se permiten archivos PDF.</p>                            </div>
+
+            try {
+
+                await createWorkspace();                </div>                        </div>
+
+            } catch (error) {
+
+                console.error('Error creando workspace:', error);                    </div>
+
+                alert('Error al crear workspace. Por favor intenta nuevamente.');
+
+            }                <!-- Sección de archivos subidos -->                    <div class="flex items-start space-x-3">
+
+        }
+
+                <div id="files-section" class="files-section mt-8">                        <span class="material-symbols-outlined text-3xl text-[var(--text-muted-color)] mt-3">123</span>
+
+        function updateFilesList() {
+
+            filesList.innerHTML = '';                    <h3 id="files-count" class="text-lg font-medium text-[var(--text-color)] mb-4">Archivos Subidos (0)</h3>                        <textarea class="w-full px-4 py-3 border border-[var(--border-color)] rounded-lg focus:ring-2 focus:ring-[var(--accent-color)] focus:border-[var(--accent-color)] transition-shadow min-h-[200px] resize-y" id="order-input" placeholder="Los códigos aparecerán aquí automáticamente después del análisis..."></textarea>
+
+            filesCount.textContent = `${uploadedFiles.length} archivo${uploadedFiles.length !== 1 ? 's' : ''}`;
+
+                    <div id="files-list" class="space-y-3 max-h-60 overflow-y-auto"></div>                    </div>
+
+            uploadedFiles.forEach((file, index) => {
+
+                const fileItem = document.createElement('div');                </div>                    <p class="text-sm text-[var(--text-muted-color)] mt-2 ml-11">Los códigos están ordenados por su primera aparición en los documentos.</p>
+
+                fileItem.className = 'file-item flex items-center justify-between p-4 border border-[var(--border-color)] rounded-lg bg-white';
+
+                                </div>
+
+                fileItem.innerHTML = `
+
+                    <div class="flex items-center space-x-3">                <!-- Sección de listado de códigos -->
+
+                        <span class="material-symbols-outlined text-red-600">picture_as_pdf</span>
+
+                        <div>                <div id="mia-order-section" class="files-section mt-6">                <!-- Sección de orden manual -->
+
+                            <p class="font-medium text-[var(--text-color)] truncate max-w-xs">${file.name}</p>
+
+                            <p class="text-sm text-[var(--text-muted-color)]">${formatFileSize(file.size)}</p>                    <h3 class="text-lg font-medium text-[var(--text-color)] mb-4">📋 Listado de Códigos</h3>                <div class="mt-8 pt-6 border-t border-[var(--border-color)]" id="manual-order-section">
+
+                        </div>
+
+                    </div>                    <p class="text-sm text-[var(--text-muted-color)] mb-3">                    <label class="block text-lg font-medium text-[var(--text-color)] mb-3" for="manual-order-input">
+
+                    <button onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 p-2">
+
+                        <span class="material-symbols-outlined">delete</span>                        Especifica los códigos que deseas extraer, uno por línea.                         Definición manual del orden de unión
+
+                    </button>
+
+                `;                        El sistema buscará estos códigos en el contenido de los PDFs y extraerá las páginas correspondientes.                    </label>
+
+                
+
+                filesList.appendChild(fileItem);                    </p>                    <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4">
+
+            });
+
+        }                    <textarea id="mia-input" class="w-full h-32 p-4 border border-[var(--border-color)] rounded-lg focus:ring-2 focus:ring-[var(--accent-color)] focus:border-[var(--accent-color)] transition-colors duration-200" placeholder="Ejemplo:                        <div class="flex items-start space-x-2">
+
+
+
+        function removeFile(index) {CB2225756406                            <span class="material-symbols-outlined text-orange-600 mt-0.5">info</span>
+
+            uploadedFiles.splice(index, 1);
+
+            updateFilesList();LIO000044043205                            <div class="text-sm text-orange-800">
+
+            
+
+            if (uploadedFiles.length === 0) {ABC123456                                <strong>Orden manual alternativo:</strong> Si no se encontraron códigos automáticamente o prefieres definir un orden específico por número de archivo, puedes usar esta sección.
+
+                filesSection.classList.remove('show');
+
+                miaOrderSection.classList.remove('show');XYZ789012                            </div>
+
+                workspaceId = null;
+
+            }                        </div>
+
+            
+
+            updateMainButton();Escribe un código por línea en el orden deseado..."></textarea>                    </div>
+
+        }
+
+                    <p class="text-xs text-[var(--text-muted-color)] mt-2">                    <div class="flex items-start space-x-3">
+
+        function updateMainButton() {
+
+            const hasFiles = uploadedFiles.length > 0;                        💡 <strong>Tip:</strong> Acepta cualquier código alfanumérico. Si no especificas códigos, se extraerán automáticamente todos los encontrados en orden alfabético.                        <span class="material-symbols-outlined text-3xl text-[var(--text-muted-color)] mt-3">123</span>
+
+            mainButton.disabled = !hasFiles || isProcessing;
+
+                                </p>                        <textarea class="w-full px-4 py-3 border border-[var(--border-color)] rounded-lg focus:ring-2 focus:ring-[var(--accent-color)] focus:border-[var(--accent-color)] transition-shadow min-h-[150px] resize-y" id="manual-order-input" placeholder="Ej:
+
+            if (hasFiles && !isProcessing) {
+
+                mainButton.querySelector('.button-text').textContent = 'Unir PDFs por Contenido';                </div>3
+
+                mainButton.classList.remove('loading', 'success');
+
+            }1
+
+        }
+
+                <!-- Botón de acción principal -->2
+
+        uploadZone.addEventListener('click', () => {
+
+            fileInput.click();                <div class="mt-8 pt-6 border-t border-[var(--border-color)] text-center">
+
+        });
+
+                    <button class="w-full max-w-md purr-button text-white px-8 py-4 rounded-xl font-semibold text-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-[var(--accent-color)] flex items-center justify-center mx-auto disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none min-h-[64px]" id="main-action-button" disabled>Introduce el número de cada archivo en una nueva línea para establecer el orden de unión."></textarea>
+
+        // ========= API CALLS =========
+
+        async function createWorkspace() {                        <div class="button-content flex items-center justify-center">                    </div>
+
+            try {
+
+                const callbackName = 'callback_' + Date.now();                            <span class="material-symbols-outlined button-icon mr-2">auto_awesome</span>                    <p class="text-sm text-[var(--text-muted-color)] mt-2 ml-11">Introduce el número de cada archivo en una nueva línea para establecer el orden de unión.</p>
+
+                const url = `${API}/jsonp/workspaces?callback=${callbackName}`;
+
+                const data = await jsonpRequest(url, callbackName);                            <span class="button-text">Analizar y Unir PDFs</span>                </div>
+
+                
+
+                if (data.success) {                        </div>                
+
+                    workspaceId = data.workspace_id;
+
+                    console.log('Workspace creado:', workspaceId);                        <div class="progress-container">                <div class="mt-8 pt-6 border-t border-[var(--border-color)] text-center">
+
+                    
+
+                    // Subir archivos al workspace                            <div class="progress-bar-bg"></div>                    <button class="w-full max-w-md purr-button text-white px-8 py-4 rounded-xl font-semibold text-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-[var(--accent-color)] flex items-center justify-center mx-auto disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none min-h-[64px]" id="main-action-button">
+
+                    await uploadFilesToWorkspace();
+
+                } else {                            <div class="progress-bar" id="progress-bar-inner" style="width: 0%;"></div>                        <div class="button-content flex items-center justify-center">
+
+                    throw new Error(data.error || 'Error creando workspace');
+
+                }                            <span class="progress-text" id="progress-text">0%</span>                            <span class="material-symbols-outlined mr-2 button-icon">merge_type</span>
+
+            } catch (error) {
+
+                console.error('Error en createWorkspace:', error);                        </div>                            <span class="button-text">Unir PDF</span>
+
+                throw error;
+
+            }                        <span class="material-symbols-outlined text-3xl success-icon">check_circle</span>                        </div>
+
+        }
+
+                    </button>                        <div class="progress-container">
+
+        async function uploadFilesToWorkspace() {
+
+            if (!workspaceId) {                </div>                            <div class="progress-bar-bg"></div>
+
+                throw new Error('No hay workspace ID');
+
+            }            </div>                            <div class="progress-bar" id="progress-bar-inner" style="width: 0%;"></div>
+
+
+
+            const formData = new FormData();        </main>                            <span class="progress-text" id="progress-text">0%</span>
+
+            uploadedFiles.forEach((file, index) => {
+
+                formData.append('files', file);                        </div>
+
+            });
+
+        <footer class="w-full max-w-4xl py-8 mt-12 text-center text-sm text-[var(--text-muted-color)]">                        <span class="material-symbols-outlined text-3xl success-icon">check_circle</span>
+
+            try {
+
+                const response = await fetch(`${API}/workspaces/${workspaceId}/upload`, {            <div class="flex justify-center space-x-6 mb-4">                    </button>
+
+                    method: 'POST',
+
+                    body: formData,                <a class="hover:text-[var(--accent-color)] transition-colors" href="terminos.html">Términos y Condiciones</a>                </div>
+
+                });
+
+                <a class="hover:text-[var(--accent-color)] transition-colors" href="privacidad.html">Privacidad</a>            </div>
+
+                if (!response.ok) {
+
+                    throw new Error(`Error HTTP: ${response.status}`);                <a class="hover:text-[var(--accent-color)] transition-colors" href="contacto.html">Contacto</a>        </main>
+
+                }
+
+            </div>        
+
+                const result = await response.json();
+
+                if (!result.success) {            <p>© 2025 PurrCrafter. Todos los derechos reservados.</p>        <footer class="w-full max-w-4xl py-8 mt-12 text-center text-sm text-[var(--text-muted-color)]">
+
+                    throw new Error(result.error || 'Error subiendo archivos');
+
+                }        </footer>            <div class="flex justify-center space-x-6 mb-4">
+
+
+
+                console.log('Archivos subidos exitosamente');    </div>                <a class="hover:text-[var(--accent-color)] transition-colors" href="terminos.html">Términos y Condiciones</a>
+
+            } catch (error) {
+
+                console.error('Error subiendo archivos:', error);                <a class="hover:text-[var(--accent-color)] transition-colors" href="privacidad.html">Privacidad</a>
+
+                throw error;
+
+            }    <script>                <a class="hover:text-[var(--accent-color)] transition-colors" href="mailto:contacto@purrcrafter.com">Contacto</a>
+
+        }
+
+        // ========= CONFIGURACIÓN =========            </div>
+
+        async function processContentOrder() {
+
+            if (!workspaceId) {        const API = 'http://localhost:3002';            <p>© 2024 PurrCrafter. Todos los derechos reservados.</p>
+
+                alert('Error: No hay workspace disponible');
+
+                return;                </footer>
+
+            }
+
+        // ========= ELEMENTOS DOM =========    </div>
+
+            isProcessing = true;
+
+            updateMainButton();        const uploadZone = document.getElementById('upload-zone');
+
+            
+
+            mainButton.classList.add('loading');        const fileInput = document.getElementById('file-upload');    <script>
+
+            const progressBar = mainButton.querySelector('.progress-bar');
+
+            const progressText = mainButton.querySelector('.progress-text');        const filesSection = document.getElementById('files-section');        // Configuración de API - cambiar por la URL real
+
+            
+
+            let progress = 0;        const miaOrderSection = document.getElementById('mia-order-section');        const API = 'https://api-oculto-9k7s.aaleddy.app';
+
+            const progressInterval = setInterval(() => {
+
+                progress += Math.random() * 15;        const miaInput = document.getElementById('mia-input');        
+
+                if (progress > 90) progress = 90;
+
+                progressBar.style.width = progress + '%';        const filesCount = document.getElementById('files-count');        let uploadedFiles = [];
+
+                progressText.textContent = `Procesando... ${Math.round(progress)}%`;
+
+            }, 500);        const filesList = document.getElementById('files-list');        let workspaceId = null;
+
+
+
+            try {        const mainButton = document.getElementById('main-action-button');        
+
+                // Preparar códigos personalizados si los hay
+
+                const miaText = miaInput.value.trim();        // Referencias a elementos del DOM
+
+                const customCodes = miaText ? miaText.split('\n').map(line => line.trim()).filter(line => line) : [];
+
+                        // ========= ESTADO GLOBAL =========        const fileUpload = document.getElementById('file-upload');
+
+                let url = `${API}/jsonp/workspaces/${workspaceId}/order-by-content?callback=callback_${Date.now()}`;
+
+                        let uploadedFiles = [];        const filesSection = document.getElementById('files-section');
+
+                if (customCodes.length > 0) {
+
+                    const codesParam = encodeURIComponent(JSON.stringify(customCodes));        let workspaceId = null;        const filesCount = document.getElementById('files-count');
+
+                    url += `&custom_codes=${codesParam}`;
+
+                }        let isProcessing = false;        const filesList = document.getElementById('files-list');
+
+
+
+                const callbackName = url.match(/callback=([^&]+)/)[1];        const codesSection = document.getElementById('codes-section');
+
+                const data = await jsonpRequest(url, callbackName);
+
+                        // ========= FUNCIONES UTILITARIAS =========        const orderInput = document.getElementById('order-input');
+
+                clearInterval(progressInterval);
+
+                progressBar.style.width = '100%';        function formatFileSize(bytes) {        const mainButton = document.getElementById('main-action-button');
+
+                progressText.textContent = 'Completado 100%';
+
+                            if (bytes === 0) return '0 Bytes';        const progressBar = document.getElementById('progress-bar-inner');
+
+                if (data.success) {
+
+                    // Mostrar éxito            const k = 1024;        const progressText = document.getElementById('progress-text');
+
+                    setTimeout(() => {
+
+                        mainButton.classList.remove('loading');            const sizes = ['Bytes', 'KB', 'MB', 'GB'];        
+
+                        mainButton.classList.add('success');
+
+                                    const i = Math.floor(Math.log(bytes) / Math.log(k));        // Drag and drop functionality
+
+                        // Guardar en sessionStorage para la página de éxito
+
+                        sessionStorage.setItem('workspaceId', workspaceId);            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];        const dropArea = document.querySelector('.border-dashed');
+
+                        sessionStorage.setItem('operation', 'content-order');
+
+                                }        
+
+                        // Redirigir a página de éxito después de un momento
+
+                        setTimeout(() => {        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+
+                            window.location.href = 'exito.html';
+
+                        }, 2000);        function jsonpRequest(url, callbackName) {            dropArea.addEventListener(eventName, preventDefaults, false);
+
+                    }, 1000);
+
+                } else {            return new Promise((resolve, reject) => {        });
+
+                    throw new Error(data.error || 'Error en el procesamiento');
+
+                }                const script = document.createElement('script');        
+
+                
+
+            } catch (error) {                const uniqueCallback = callbackName + '_' + Date.now();        function preventDefaults(e) {
+
+                clearInterval(progressInterval);
+
+                mainButton.classList.remove('loading');                            e.preventDefault();
+
+                isProcessing = false;
+
+                updateMainButton();                window[uniqueCallback] = function(data) {            e.stopPropagation();
+
+                
+
+                console.error('Error procesando:', error);                    resolve(data);        }
+
+                alert('Error al procesar los archivos: ' + error.message);
+
+            }                    document.head.removeChild(script);        
+
+        }
+
+                    delete window[uniqueCallback];        ['dragenter', 'dragover'].forEach(eventName => {
+
+        // ========= EVENT LISTENERS =========
+
+        mainButton.addEventListener('click', processContentOrder);                };            dropArea.addEventListener(eventName, highlight, false);
+
+    </script>
+
+</body>                        });
+
+</html>
+                script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + uniqueCallback;        
+
+                script.onerror = () => {        ['dragleave', 'drop'].forEach(eventName => {
+
+                    reject(new Error('JSONP request failed'));            dropArea.addEventListener(eventName, unhighlight, false);
+
+                    document.head.removeChild(script);        });
+
+                    delete window[uniqueCallback];        
+
+                };        function highlight(e) {
+
+                            dropArea.classList.add('border-[var(--accent-color)]', 'bg-blue-50/50');
+
+                document.head.appendChild(script);        }
+
+                        
+
+                setTimeout(() => {        function unhighlight(e) {
+
+                    if (window[uniqueCallback]) {            dropArea.classList.remove('border-[var(--accent-color)]', 'bg-blue-50/50');
+
+                        reject(new Error('JSONP request timeout'));        }
+
+                        document.head.removeChild(script);        
+
+                        delete window[uniqueCallback];        dropArea.addEventListener('drop', handleDrop, false);
+
+                    }        
+
+                }, 10000);        function handleDrop(e) {
+
+            });            const dt = e.dataTransfer;
+
+        }            const files = dt.files;
+
+            handleFiles(files);
+
+        // ========= MANEJO DE ARCHIVOS =========        }
+
+        uploadZone.addEventListener('dragover', (e) => {        
+
+            e.preventDefault();        fileUpload.addEventListener('change', function(e) {
+
+            uploadZone.classList.add('border-[var(--accent-color)]', 'bg-blue-50');            handleFiles(e.target.files);
+
+        });        });
+
+        
+
+        uploadZone.addEventListener('dragleave', (e) => {        function handleFiles(files) {
+
+            e.preventDefault();            uploadedFiles = Array.from(files).filter(file => file.type === 'application/pdf');
+
+            uploadZone.classList.remove('border-[var(--accent-color)]', 'bg-blue-50');            
+
+        });            if (uploadedFiles.length === 0) {
+
+                alert('Por favor, selecciona archivos PDF válidos.');
+
+        uploadZone.addEventListener('drop', (e) => {                return;
+
+            e.preventDefault();            }
+
+            uploadZone.classList.remove('border-[var(--accent-color)]', 'bg-blue-50');            
+
+            const files = Array.from(e.dataTransfer.files).filter(file => file.type === 'application/pdf');            displayFiles();
+
+            handleFiles(files);            uploadFiles();
+
+        });        }
+
+        
+
+        fileInput.addEventListener('change', (e) => {        function displayFiles() {
+
+            const files = Array.from(e.target.files);            filesCount.textContent = `Archivos Subidos (${uploadedFiles.length})`;
+
+            handleFiles(files);            filesSection.style.display = 'block';
+
+        });            
+
+            filesList.innerHTML = '';
+
+        async function handleFiles(files) {            uploadedFiles.forEach((file, index) => {
+
+            if (files.length === 0) {                const fileItem = document.createElement('div');
+
+                alert('No se seleccionaron archivos PDF válidos.');                fileItem.className = 'file-item flex items-center justify-between p-4 border border-[var(--border-color)] rounded-lg';
+
+                return;                fileItem.innerHTML = `
+
+            }                    <div class="flex items-center space-x-4">
+
+                        <span class="material-symbols-outlined text-3xl text-[var(--primary-color)]">picture_as_pdf</span>
+
+            console.log(`Procesando ${files.length} archivo(s) localmente`);                        <div class="flex flex-col">
+
+                            <span class="font-medium text-sm text-[var(--text-color)]">${file.name}</span>
+
+            // Procesar todos los archivos inmediatamente                            <span class="text-xs text-[var(--text-muted-color)]">${(file.size / 1024 / 1024).toFixed(1)} MB</span>
+
+            for (const file of files) {                        </div>
+
+                try {                    </div>
+
+                    console.log(`Agregando archivo: ${file.name} (${file.size} bytes)`);                    <div class="flex items-center space-x-2">
+
+                                            <div class="text-xs text-[var(--text-muted-color)]">
+
+                    // Convertir File a ArrayBuffer para poder guardarlo                            <span class="material-symbols-outlined text-sm animate-spin">sync</span>
+
+                    const arrayBuffer = await file.arrayBuffer();                            Analizando...
+
+                    const fileData = {                        </div>
+
+                        name: file.name,                        <button class="p-2 text-[var(--text-muted-color)] hover:text-red-500 transition-colors" onclick="removeFile(${index})">
+
+                        size: file.size,                            <span class="material-symbols-outlined">delete</span>
+
+                        type: file.type,                        </button>
+
+                        arrayBuffer: Array.from(new Uint8Array(arrayBuffer)), // Convertir a array para JSON                    </div>
+
+                        id: uploadedFiles.length                `;
+
+                    };                filesList.appendChild(fileItem);
+
+                                });
+
+                    uploadedFiles.push(fileData);        }
+
+                            
+
+                    // Actualizar la lista en tiempo real        function removeFile(index) {
+
+                    updateFilesList();            uploadedFiles.splice(index, 1);
+
+                                if (uploadedFiles.length === 0) {
+
+                    console.log(`Archivo ${file.name} agregado exitosamente`);                filesSection.style.display = 'none';
+
+                                    codesSection.style.display = 'none';
+
+                } catch (error) {            } else {
+
+                    console.error(`Error al procesar ${file.name}:`, error);                displayFiles();
+
+                    alert(`Error al procesar ${file.name}: ${error.message}`);            }
+
+                }        }
+
+            }        
+
+        async function uploadFiles() {
+
+            updateButtonState();            try {
+
+        }                // Crear workspace
+
+                const wsResponse = await fetch(`${API}/workspaces`, { method: 'POST' });
+
+        function updateFilesList() {                const wsData = await wsResponse.json();
+
+            filesCount.textContent = `Archivos Subidos (${uploadedFiles.length})`;                workspaceId = wsData.workspace_id;
+
+                            
+
+            if (uploadedFiles.length > 0) {                // Subir archivos
+
+                filesSection.classList.add('show');                const formData = new FormData();
+
+                miaOrderSection.classList.add('show');                uploadedFiles.forEach(file => {
+
+            }                    formData.append('files', file);
+
+                });
+
+            filesList.innerHTML = '';                
+
+                const uploadResponse = await fetch(`${API}/workspaces/${workspaceId}/upload`, {
+
+            uploadedFiles.forEach((file, index) => {                    method: 'POST',
+
+                const fileItem = document.createElement('div');                    body: formData
+
+                fileItem.className = 'file-item flex items-center justify-between p-4 border border-[var(--border-color)] rounded-lg';                });
+
+                fileItem.innerHTML = `                
+
+                    <div class="flex items-center space-x-4">                const uploadData = await uploadResponse.json();
+
+                        <div class="flex-shrink-0">                
+
+                            <div class="w-8 h-8 bg-[var(--primary-color)] text-white rounded-full flex items-center justify-center font-bold text-sm">                if (uploadData.count > 0) {
+
+                                ${index + 1}                    // Crear índice para buscar códigos por contenido
+
+                            </div>                    await createIndex();
+
+                        </div>                }
+
+                        <div class="flex-grow">                
+
+                            <h4 class="font-medium text-[var(--text-color)]">${file.name}</h4>            } catch (error) {
+
+                            <p class="text-sm text-[var(--text-muted-color)]">${formatFileSize(file.size)}</p>                console.error('Error uploading files:', error);
+
+                        </div>                alert('Error al subir archivos. Por favor, intenta de nuevo.');
+
+                    </div>            }
+
+                    <button class="text-red-500 hover:text-red-700 transition-colors" onclick="removeFile(${index})">        }
+
+                        <span class="material-symbols-outlined">delete</span>        
+
+                    </button>        async function createIndex() {
+
+                `;            try {
+
+                filesList.appendChild(fileItem);                const indexResponse = await fetch(`${API}/workspaces/${workspaceId}/index`, {
+
+            });                    method: 'POST',
+
+        }                    headers: { 'Content-Type': 'application/json' },
+
+                    body: JSON.stringify({
+
+        function removeFile(index) {                        scan_mode: 'content',
+
+            uploadedFiles.splice(index, 1);                        pattern: '\\b[A-Za-z]{2,}[-_ ]?\\d{1,}[A-Za-z0-9]*\\b',
+
+            updateFilesList();                        max_pages: 10000
+
+            updateButtonState();                    })
+
+        }                });
+
+                
+
+        function updateButtonState() {                const indexData = await indexResponse.json();
+
+            if (uploadedFiles.length > 0) {                
+
+                mainButton.disabled = false;                // Actualizar estado de archivos (quitar "Analizando...")
+
+            } else {                const fileItems = document.querySelectorAll('.file-item');
+
+                mainButton.disabled = true;                fileItems.forEach(item => {
+
+                filesSection.classList.remove('show');                    const statusDiv = item.querySelector('.text-xs.text-\\[var\\(--text-muted-color\\)\\]');
+
+                miaOrderSection.classList.remove('show');                    if (statusDiv && statusDiv.textContent.includes('Analizando...')) {
+
+            }                        statusDiv.innerHTML = '<span class="material-symbols-outlined text-sm text-green-600">check_circle</span> Analizado';
+
+        }                    }
+
+                });
+
+        // ========= PROCESAMIENTO PRINCIPAL =========                
+
+        async function mergePDFs() {                // Obtener códigos encontrados y mostrarlos
+
+            if (isProcessing) return;                if (indexData.codes && indexData.codes.length > 0) {
+
+                                orderInput.value = indexData.codes.join('\n');
+
+            isProcessing = true;                    codesSection.style.display = 'block';
+
+            mainButton.classList.add('loading');                } else {
+
+            mainButton.disabled = true;                    // Mostrar mensaje de que no se encontraron códigos
+
+                                codesSection.style.display = 'block';
+
+            try {                    orderInput.placeholder = 'No se encontraron códigos en el contenido de los PDFs.\nPuedes escribir códigos manualmente si los conoces.';
+
+                // PASO 1: Crear workspace (10%)                }
+
+                console.log('📁 Creando workspace...');                
+
+                updateProgress(10, 'Creando workspace...');            } catch (error) {
+
+                                console.error('Error creating index:', error);
+
+                const workspaceData = await jsonpRequest(`${API}/jsonp/workspaces`, 'callback');                alert('Error al analizar el contenido de los PDFs.');
+
+                if (!workspaceData.workspace_id) {            }
+
+                    throw new Error('Error creando workspace');        }
+
+                }        
+
+                workspaceId = workspaceData.workspace_id;        // Evento del botón principal
+
+                console.log('✅ Workspace creado:', workspaceId);        mainButton.addEventListener('click', async () => {
+
+                            if (!workspaceId || uploadedFiles.length === 0) {
+
+                // PASO 2: Subir archivos (10% - 60%)                alert('Primero debes subir archivos PDF.');
+
+                console.log('Subiendo archivos...');                return;
+
+                await uploadFilesToServer();            }
+
+                            
+
+                // PASO 3: Analizar contenido (60% - 85%)            // Verificar si hay códigos automáticos o orden manual
+
+                console.log('Analizando contenido...');            const automaticCodes = orderInput.value.split('\n').map(s => s.trim()).filter(Boolean);
+
+                updateProgress(75, 'Analizando contenido de documentos...');            const manualOrder = document.getElementById('manual-order-input').value.split('\n').map(s => s.trim()).filter(Boolean);
+
+                            
+
+                // PASO 4: Procesar y unir (85% - 100%)            let finalOrder = [];
+
+                console.log('Procesando y ordenando archivos...');            if (automaticCodes.length > 0) {
+
+                updateProgress(90, 'Procesando y uniendo...');                finalOrder = automaticCodes;
+
+                            } else if (manualOrder.length > 0) {
+
+                // Construir URL del API con parámetros opcionales                finalOrder = manualOrder;
+
+                let apiUrl = `${API}/jsonp/workspaces/${workspaceId}/order-by-content`;            } else {
+
+                                alert('Debes especificar el orden usando códigos encontrados o definición manual.');
+
+                // Verificar si el usuario especificó una lista de códigos                return;
+
+                const codigoListInput = miaInput.value.trim();            }
+
+                if (codigoListInput) {            
+
+                    // Limpiar y formatear la lista de códigos            mainButton.classList.add('loading');
+
+                    const codigoList = codigoListInput            mainButton.disabled = true;
+
+                        .split(/[,\n]/)            
+
+                        .map(codigo => codigo.trim())            try {
+
+                        .filter(codigo => codigo.length > 0)                // Simular progreso
+
+                        .join(',');                let progress = 0;
+
+                                    const progressInterval = setInterval(() => {
+
+                    if (codigoList) {                    progress += 8;
+
+                        apiUrl += `?codigo_list=${encodeURIComponent(codigoList)}`;                    progressBar.style.width = `${progress}%`;
+
+                        console.log('📋 Lista de códigos especificada:', codigoList);                    progressText.textContent = `${progress}%`;
+
+                    }                    if (progress >= 90) {
+
+                }                        clearInterval(progressInterval);
+
+                                    }
+
+                const processData = await jsonpRequest(apiUrl, 'callback');                }, 300);
+
+                console.log('✅ Archivos procesados:', processData);                
+
+                                // Crear PDF unificado
+
+                if (processData.success) {                const mergeResponse = await fetch(`${API}/workspaces/${workspaceId}/merge-by-code`, {
+
+                    updateProgress(100, '¡Completado!');                    method: 'POST',
+
+                                        headers: { 'Content-Type': 'application/json' },
+
+                    // Guardar información en sessionStorage para la página de éxito                    body: JSON.stringify({
+
+                    sessionStorage.setItem('workspaceId', workspaceId);                        order: finalOrder,
+
+                    if (processData.data && processData.data.pdf_url) {                        output_name: 'resultado.pdf',
+
+                        sessionStorage.setItem('downloadUrl', processData.data.pdf_url);                        on_missing: 'skip',
+
+                        // Extraer el nombre del archivo de la URL                        source_filter: 'content',
+
+                        const filename = processData.data.pdf_url.split('/').pop();                        filename_behavior: 'first_page',
+
+                        sessionStorage.setItem('filename', filename);                        pages_per_code: 'first'
+
+                    }                    })
+
+                                    });
+
+                    setTimeout(() => {                
+
+                        mainButton.classList.remove('loading');                const mergeData = await mergeResponse.json();
+
+                        mainButton.classList.add('success');                
+
+                                        clearInterval(progressInterval);
+
+                        // Navegar a página de éxito después de 1 segundo                progressBar.style.width = '100%';
+
+                        setTimeout(() => {                progressText.textContent = '100%';
+
+                            window.location.href = `exito.html`;                
+
+                        }, 1000);                setTimeout(() => {
+
+                    }, 500);                    mainButton.classList.remove('loading');
+
+                } else {                    mainButton.classList.add('success');
+
+                    throw new Error(processData.error || 'Error en el procesamiento');                    
+
+                }                    // Redirigir a página de descarga después de mostrar éxito
+
+                                    setTimeout(() => {
+
+            } catch (error) {                        window.location.href = `exito.html?download=${encodeURIComponent(API + mergeData.download_url)}&pages=${mergeData.pages}`;
+
+                console.error('❌ Error en el proceso:', error);                    }, 2000);
+
+                alert('Error al procesar los PDFs. Por favor, inténtalo de nuevo.');                }, 500);
+
+                                
+
+                mainButton.classList.remove('loading');            } catch (error) {
+
+                mainButton.classList.add('error');                console.error('Error merging files:', error);
+
+                mainButton.innerHTML = '❌ Error - Reintentar';                alert('Error al unir archivos. Por favor, intenta de nuevo.');
+
+                mainButton.disabled = false;                mainButton.classList.remove('loading');
+
+                isProcessing = false;                mainButton.disabled = false;
+
+                            }
+
+                setTimeout(() => {        });
+
+                    location.reload();    </script>
+
+                }, 3000);</body>
+
+            }</html>
+        }
+
+        async function uploadFilesToServer() {
+            const totalFiles = uploadedFiles.length;
+            const uploadStep = 50 / totalFiles; // De 10% a 60% = 50% total
+            
+            for (let i = 0; i < totalFiles; i++) {
+                const fileItem = uploadedFiles[i];
+                
+                // Reconstruir el archivo File desde el ArrayBuffer
+                const uint8Array = new Uint8Array(fileItem.arrayBuffer);
+                const actualFile = new File([uint8Array], fileItem.name, {
+                    type: fileItem.type
+                });
+                
+                const progress = 10 + ((i + 1) * uploadStep);
+                updateProgress(Math.round(progress), `Subiendo ${fileItem.name}...`);
+                
+                const formData = new FormData();
+                formData.append('files', actualFile);
+                
+                const response = await fetch(`${API}/workspaces/${workspaceId}/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Error subiendo ${fileItem.name}`);
+                }
+                
+                console.log(`✅ Archivo subido: ${fileItem.name}`);
+            }
+        }
+
+        function updateProgress(percentage, text) {
+            const progressBar = mainButton.querySelector('.progress-bar');
+            const progressText = mainButton.querySelector('.progress-text');
+            
+            if (progressBar) progressBar.style.width = percentage + '%';
+            if (progressText) progressText.textContent = text;
+        }
+
+        // ========= EVENT LISTENERS =========
+        mainButton.addEventListener('click', mergePDFs);
+
+        // Crear workspace al cargar la página
+        window.addEventListener('load', async () => {
+            try {
+                const workspaceData = await jsonpRequest(`${API}/jsonp/workspaces`, 'callback');
+                if (workspaceData.workspace_id) {
+                    workspaceId = workspaceData.workspace_id;
+                    console.log('✅ Workspace inicial creado:', workspaceId);
+                }
+            } catch (error) {
+                console.error('❌ Error creando workspace inicial:', error);
+            }
+        });
+    </script>
+</body>
+</html>

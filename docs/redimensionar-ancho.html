@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Redimensionar Ancho de PDF - PurrCrafter</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1897264775520223"
+     crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <style type="text/tailwindcss">
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #1F2937;
+            --primary-color: #2563EB;
+            --secondary-color: #F9FAFB;
+            --accent-color: #3B82F6;
+            --border-color: #E5E7EB;
+            --text-muted-color: #6B7280;
+            --success-color: #10B981;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .purr-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+        }
+        .purr-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border-color: var(--primary-color);
+        }
+        .purr-button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: var(--primary-color);
+        }
+        .purr-button:hover:not(:disabled) {
+            transform: scale(1.05);
+            background-color: var(--accent-color);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+        }
+        .drag-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            background-color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        .drag-area.dragover {
+            border-color: var(--accent-color);
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+        .processing {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .progress-bar {
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto px-4 min-h-screen flex flex-col items-center pt-10">
+        <header class="text-center w-full max-w-4xl mb-8">
+            <a href="index.html" class="inline-block mb-6 text-[var(--accent-color)] hover:text-[var(--primary-color)]">
+                <div class="flex items-center space-x-2 justify-center">
+                    <span class="material-symbols-outlined text-4xl">description</span>
+                    <span class="font-bold text-2xl">PurrCrafter</span>
+                </div>
+            </a>
+            <h1 class="text-4xl md:text-5xl font-bold text-[var(--text-color)]">Redimensionar Ancho de PDF</h1>
+            <p class="text-lg text-[var(--text-muted-color)] mt-2">Ajusta el ancho de tu PDF automáticamente usando el tamaño más común.</p>
+        </header>
+
+        <main class="w-full max-w-4xl flex-grow">
+            <div class="bg-white rounded-2xl border border-[var(--border-color)] p-6 md:p-8 shadow-sm">
+                
+                <!-- Zona de subida -->
+                <div id="upload-zone" class="drag-area p-8 text-center cursor-pointer min-h-[200px] flex flex-col items-center justify-center">
+                    <span class="material-symbols-outlined text-6xl text-[var(--text-muted-color)] mb-4">cloud_upload</span>
+                    <p class="text-lg font-medium text-[var(--text-color)] mb-2">Sube tu archivo PDF</p>
+                    <p class="text-sm text-[var(--text-muted-color)] mb-4">Arrastra y suelta o haz click para seleccionar</p>
+                    <input type="file" id="file-upload" class="hidden" accept=".pdf" />
+                    <button type="button" onclick="document.getElementById('file-upload').click()" class="purr-button text-white px-6 py-3 rounded-lg font-medium">
+                        Seleccionar PDF
+                    </button>
+                </div>
+
+                <!-- Progreso -->
+                <div id="progress-section" class="hidden mt-6">
+                    <div class="bg-[var(--secondary-color)] rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span id="progress-text" class="text-sm font-medium text-[var(--text-color)]">Procesando...</span>
+                            <span id="progress-percent" class="text-sm text-[var(--text-muted-color)]">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div id="progress-bar" class="progress-bar bg-[var(--accent-color)] h-2 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resultado -->
+                <div id="result-section" class="hidden mt-6">
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                        <span class="material-symbols-outlined text-4xl text-green-600 mb-2">check_circle</span>
+                        <h3 class="text-lg font-semibold text-green-800 mb-2">¡PDF Redimensionado Exitosamente!</h3>
+                        <button id="download-btn" class="purr-button text-white px-6 py-3 rounded-lg font-medium">
+                            <span class="material-symbols-outlined mr-2">download</span>
+                            Descargar PDF Redimensionado
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="w-full max-w-4xl py-8 mt-12 text-center text-sm text-[var(--text-muted-color)]">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a class="hover:text-[var(--accent-color)] transition-colors" href="terminos.html">Términos y Condiciones</a>
+                <a class="hover:text-[var(--accent-color)] transition-colors" href="privacidad.html">Privacidad</a>
+                <a class="hover:text-[var(--accent-color)] transition-colors" href="#contacto">Contacto</a>
+            </div>
+            <p>© 2024 PurrCrafter. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+                // Configuración de la API
+        const API_BASE = 'https://api-oculto-9k7s.aaleddy.app';
+
+        // Elementos DOM
+        const uploadZone = document.getElementById('upload-zone');
+        const fileInput = document.getElementById('file-upload');
+        const progressSection = document.getElementById('progress-section');
+        const progressText = document.getElementById('progress-text');
+        const progressPercent = document.getElementById('progress-percent');
+        const progressBar = document.getElementById('progress-bar');
+        const resultSection = document.getElementById('result-section');
+        const downloadBtn = document.getElementById('download-btn');
+
+        let currentWorkspaceId = null;
+        let downloadUrl = null;
+
+        // ========= UTILIDADES JSONP =========
+        function jsonpRequest(url, callbackParam = 'callback') {
+            return new Promise((resolve, reject) => {
+                const callbackName = 'jsonp_callback_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+                
+                window[callbackName] = function(data) {
+                    delete window[callbackName];
+                    document.head.removeChild(script);
+                    resolve(data);
+                };
+                
+                const script = document.createElement('script');
+                script.onerror = function() {
+                    delete window[callbackName];
+                    document.head.removeChild(script);
+                    reject(new Error('JSONP request failed for: ' + url));
+                };
+                
+                const separator = url.includes('?') ? '&' : '?';
+                script.src = url + separator + callbackParam + '=' + callbackName;
+                document.head.appendChild(script);
+            });
+        }
+
+        // Actualizar progreso
+        function updateProgress(percent, text) {
+            progressText.textContent = text;
+            progressPercent.textContent = percent + '%';
+            progressBar.style.width = percent + '%';
+        }
+
+        // Mostrar resultado
+        function showResult() {
+            progressSection.classList.add('hidden');
+            resultSection.classList.remove('hidden');
+        }
+
+        // Procesar archivo
+        async function processFile(file) {
+            try {
+                progressSection.classList.remove('hidden');
+                uploadZone.classList.add('processing');
+                
+                updateProgress(10, 'Creando workspace...');
+                
+                // PASO 1: Crear workspace (usando POST normal)
+                const workspaceResponse = await fetch(`${API}/workspaces`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!workspaceResponse.ok) {
+                    throw new Error(`Error creando workspace: ${workspaceResponse.status}`);
+                }
+                
+                const workspaceData = await workspaceResponse.json();
+                currentWorkspaceId = workspaceData.workspace_id;
+                console.log('✅ Workspace creado:', currentWorkspaceId);
+                
+                updateProgress(30, 'Subiendo archivo...');
+                
+                // PASO 2: Subir archivo (usando FormData normal)
+                const formData = new FormData();
+                formData.append('file', file);
+                
+                const uploadResponse = await fetch(`${API}/workspaces/${currentWorkspaceId}/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!uploadResponse.ok) {
+                    throw new Error(`Error subiendo archivo: ${uploadResponse.status}`);
+                }
+                
+                console.log('✅ Archivo subido');
+                
+                updateProgress(50, 'Analizando PDF...');
+                
+                // PASO 3: Obtener metadatos para detectar ancho más común (usando JSONP)
+                const metadataUrl = `${API}/jsonp/workspaces/${currentWorkspaceId}/pdf-metadata?filename=${encodeURIComponent(file.name)}`;
+                const metadata = await jsonpRequest(metadataUrl, 'callback');
+                console.log('✅ Metadatos obtenidos:', metadata);
+                
+                updateProgress(70, 'Calculando ancho óptimo...');
+                
+                // PASO 4: Encontrar el ancho más común (como en tu ejemplo)
+                const widths = metadata.pages.map(page => Math.round(page.width));
+                const widthCounts = {};
+                widths.forEach(width => {
+                    widthCounts[width] = (widthCounts[width] || 0) + 1;
+                });
+                
+                const mostCommonWidth = Object.keys(widthCounts).reduce((a, b) => 
+                    widthCounts[a] > widthCounts[b] ? a : b
+                );
+                
+                console.log('🎯 Ancho más común encontrado:', mostCommonWidth, 'puntos');
+                console.log('📊 Distribución de anchos:', widthCounts);
+                
+                updateProgress(90, 'Redimensionando PDF...');
+                
+                // PASO 5: Redimensionar usando el ancho más común (usando JSONP)
+                const resizeUrl = `${API}/jsonp/workspaces/${currentWorkspaceId}/resize-width?filename=${encodeURIComponent(file.name)}&target_width=${mostCommonWidth}&mode=by_width`;
+                const resizeResult = await jsonpRequest(resizeUrl, 'callback');
+                console.log('✅ PDF redimensionado:', resizeResult);
+                
+                downloadUrl = resizeResult.download_url;
+                
+                updateProgress(100, '¡Completado!');
+                
+                setTimeout(() => {
+                    showResult();
+                }, 500);
+                
+            } catch (error) {
+                console.error('❌ Error procesando archivo:', error);
+                console.error('❌ Detalles del error:', error.message);
+                console.error('❌ Stack:', error.stack);
+                alert('Error procesando el archivo: ' + error.message + '\n\nRevisa la consola para más detalles.');
+                uploadZone.classList.remove('processing');
+                progressSection.classList.add('hidden');
+            }
+        }
+
+        // Event listeners
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                processFile(file);
+            } else {
+                alert('Por favor selecciona un archivo PDF válido.');
+            }
+        });
+
+        // Drag and drop
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            
+            const file = e.dataTransfer.files[0];
+            if (file && file.type === 'application/pdf') {
+                processFile(file);
+            } else {
+                alert('Por favor selecciona un archivo PDF válido.');
+            }
+        });
+
+        // Descargar resultado
+        downloadBtn.addEventListener('click', () => {
+            if (downloadUrl) {
+                const link = document.createElement('a');
+                link.href = `${API}${downloadUrl}`;
+                link.download = 'pdf-redimensionado.pdf';
+                link.target = '_blank';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        });
+    </script>
+</body>
+</html>
